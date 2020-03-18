@@ -1,0 +1,18 @@
+
+Add a new member to a club
+--> INSERT INTO Member VALUES (67632, 8, 'SP', 2020, 1);
+
+Print all the active students of the semester
+--> SELECT StusID, SFname, SLname
+	FROM Member NATURAL JOIN Student
+	where semester = 'SP'
+	AND year = 2020
+	AND active = 1;
+
+Print all events not yet approved
+--> SELECT ev_name, ev_descript FROM Event E WHERE E.adv_approval IS NULL OR E.sao_approval IS NULL;
+
+Number of meetings missed by a member
+--> SELECT COUNT(*) - (SELECT COUNT(*) FROM Attendance WHERE StudID = (SELECT StudIDFROM Student WHERE SFname = 'Aymane'))
+FROM Meeting WHERE ClubID = (SELECT ClubID FROM Club WHERE CName = 'VUC') AND Semester = 'SPR'
+
