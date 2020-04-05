@@ -1,18 +1,101 @@
+/*** THE ONES MODIFIED ***/ 
+-- Delete a club based on club name
+DELETE FROM Club WHERE C_name = 'ROTARACT';
 
-Add a new member to a club
---> INSERT INTO Member VALUES (67632, 8, 'SP', 2020, 1);
+-- Insert a new SAO Officer
+INSERT INTO SAOfficer VALUES (54732, 'Cherif', 'Belfqih', 5698, 'pass123');
 
-Print all the active students of the semester
---> SELECT StusID, SFname, SLname
-	FROM Member NATURAL JOIN Student
-	where semester = 'SP'
-	AND year = 2020
-	AND active = 1;
+-- Displayin the number of members of a club in a given semester
+SELECT COUNT(*) FROM Member M WHERE S.S	EMESTER = 'SPR';
 
-Print all events not yet approved
---> SELECT ev_name, ev_descript FROM Event E WHERE E.adv_approval IS NULL OR E.sao_approval IS NULL;
 
-Number of meetings missed by a member
---> SELECT COUNT(*) - (SELECT COUNT(*) FROM Attendance WHERE StudID = (SELECT StudIDFROM Student WHERE SFname = 'Aymane'))
-FROM Meeting WHERE ClubID = (SELECT ClubID FROM Club WHERE CName = 'VUC') AND Semester = 'SPR'
+--CLUB VIEW for members
+CREATE VIEW ClubView AS
+SELECT CName, CcreationDate, AdvFname + ' ' + AdvLname AS AdvName, CDescript
+FROM Club C JOIN Advisor A ON A.AdvID = C.AdvID;
 
+/*** THE ONES NOT MODIFIED YET ***/ 
+
+-- Function to check if a location is free in a given interval of time
+CREATE FUNCTION CheckLocation (@loc VARCHAR(30), @t1 DATETIME, @t2 DATETIME)
+RETURNS BIT AS
+BEGIN;
+	RETURN SELECT DISTINCT 1 FROM Event E JOIN Location L ON E.ev_loc = L.loc_id
+	WHERE loc_name = @loc AND ((ev_start >= @t1 AND ev_start <= @t2) OR (ev_end <= @t2 AND ev_end >= @t1));
+	   
+
+END;
+
+-- Number of meetings missed by a member
+SELECT COUNT(*) - (SELECT COUNT(*) FROM Attendance WHERE s_id = (SELECT s_id FROM Student WHERE s_name = 'sName'))
+FROM Meeting WHERE c_id = (SELECT c_id FROM Club WHERE c_name = 'cName') AND mee_sem = 'semester';
+
+
+-- AMOUNT COLLECTED BY CLUB
+SELECT SUM(tran_amount) AS [Money Collected] 
+FROM TRANSATCION WHERE c_id = (SELECT c_id FROM Club WHERE c_name = 'ClubName') AND tran_type = "sell"
+
+-- AMOUNT USED BY CLUB 
+SELECT SUM(tran_amount) AS [Money Collected] 
+FROM TRANSATCION WHERE c_id = (SELECT c_id FROM Club WHERE c_name = 'ClubName') AND tran_type = "buy"
+
+
+-- Print All students of a club with the number of meetings they attendant this semester
+CREATE PROCEDURE member_meeting @c_name VARCHAR(20), @sem TINYINT
+AS
+BEGIN;
+
+	SELECT A.s_id, COUNT(A.m_number)
+ 	FROM  Attendance A JOIN Member M ON A.s_id = M.s_id AND M.c_id = A.c_id AND M.sem_code = A.sem_code AND M.year = A.year
+ 	JOIN Club C ON C.c_id = M.c_id
+ 	WHERE c_name = @c_name AND M.sem_code = @sem
+ 	GROUP BY A.s_id;
+
+END;
+
+-- Print all events not yet approved
+SELECT ev_name, ev_descript FROM Event E WHERE E.adv_approval IS NULL OR E.sao_approval IS NULL;
+
+
+-- Print Upcoming events made by a certain club
+CREATE PROCEDURE show_upcoming @c_name VARCHAR(20), @date DATE
+AS
+BEGIN;
+
+	SELECT DISTINCT E.EvtName, E.EvtDescript
+	FROM Event E JOIN Collaboration C ON C.ev_code = E.ev_code 
+	JOIN Club CC ON CC.c_id = C.c_id
+	WHERE E.ev_start >= @date AND CC.c_name = @c_name;
+
+END;
+
+-- Print events on a certain date
+CREATE PROCEDURE show_events @date DATE
+AS
+BEGIN;
+	DECLARE @ev_name VARCHAR(20),
+			@ev_descript VARCHAR (100),
+			@c_name VARCHAR(20);
+	DECLARE cur CURSOR FOR 
+	SELECT E.ev_name, E.ev_descript, ISNULL(C.c_name, 'SAO') 
+	FROM Event E LEFT OUTER JOIN Club C ON E.ev_creator = C.c_id
+	WHERE E.ev_start = @date;
+
+
+
+	OPEN cur;
+	FETCH NEXT FROM cur INTO @ev_name, @ev_descript, @c_name;
+
+	WHILE(@@FETCH_STATUS = 0)
+	BEGIN;
+		PRINT 'Event Name :  ' + @ev_name + ' Event description : ' + @ev_descript + ' Brought By : ' + @c_name;
+		FETCH NEXT FROM cur INTO @ev_name, @ev_descript, @c_name;
+	END;
+
+	CLOSE cur;
+	DEALLOCATE cur;
+END;
+
+
+
+ 
