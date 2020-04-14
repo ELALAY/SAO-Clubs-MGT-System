@@ -1,15 +1,15 @@
 <?php
 //
-// get_product_to_update.inc.php
+// get_Event_to_update.inc.php
 //
 
 $error_msg = "";
-$pcode = "";
+$EvtID = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
   // Get data from form
-  $pcode = $_POST["pcode"];
+  $EvtID = $_POST["EvtID"];
 
   // Connect to database server
   include_once 'db_connect.php';
@@ -18,36 +18,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     // Set the PDO error mode to exception
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Check whether the submitted product already exists
-    $sql = "SELECT ProdCode
-            FROM Product
-            WHERE ProdCode = :pcode";
+    // Check whether the submitted Event already exists
+    $sql = "SELECT EvtID
+            FROM Event
+            WHERE EvtID = :EvtID";
 
     $sth = $dbh->prepare($sql);
-    $sth->bindParam(':pcode', $pcode);
+    $sth->bindParam(':EvtID', $EvtID);
     // Execute the prepared query.
     $res = $sth->execute();
     $record = $sth->fetchAll();
 
     if (count($record) == 0)
     {
-      // A product with this code does not exists
-      $error_msg = "<p>A product with this code does not exists.</p>";
+      // A Event with this code does not exists
+      $error_msg = "<p>A Event with this code does not exists.</p>";
     }
     else
     {
-      $sql2 = "DELETE FROM Product
-              WHERE ProdCode = :pcode";
+      $sql2 = "DELETE FROM Event
+              WHERE EvtID = :EvtID";
 
       $sth2 = $dbh->prepare($sql2);
-      $sth2->bindParam(':pcode', $pcode);
+      $sth2->bindParam(':EvtID', $EvtID);
       // Execute the prepared query.
       $res = $sth2->execute();
-      // A Message that the product was deleted
-      //$error_msg = "<p>The product has been deleted</p>";
-      $message = "product deleted!";
+      // A Message that the Event was deleted
+      //$error_msg = "<p>The Event has been deleted</p>";
+      $message = "Event deleted!";
       echo "<script type='text/javascript'>alert('$message');</script>";
-      header('location: index.html');
+      header('location: events.html');
       exit();
     }
   }
