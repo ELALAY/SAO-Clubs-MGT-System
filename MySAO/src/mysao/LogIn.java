@@ -5,7 +5,6 @@
  */
 package mysao;
 
-import Controlers.LogIn_Controller;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,8 +16,6 @@ import javax.swing.JOptionPane;
  * @author hp
  */
 public class LogIn extends javax.swing.JFrame {
-
-    LogIn_Controller login_con;
 
     /**
      * Creates new form LogIn
@@ -155,8 +152,8 @@ public class LogIn extends javax.swing.JFrame {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(LogIn_Controller.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
+        } 
 
 
     }//GEN-LAST:event_LogIn_ButtonActionPerformed

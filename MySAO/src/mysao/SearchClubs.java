@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package my.mystore;
+package mysao;
 
 import java.sql.*;
 import java.util.logging.Level;
@@ -14,12 +14,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author hp
  */
-public class SearchProducts extends javax.swing.JFrame {
+public class SearchClubs extends javax.swing.JFrame {
 
     /**
      * Creates new form SearchProducts
      */
-    public SearchProducts() {
+    public SearchClubs() {
         initComponents();
 
         //Initialize the JTable data model
@@ -38,7 +38,7 @@ public class SearchProducts extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        VendCode_TextField = new javax.swing.JTextField();
+        ClubCode_TextField = new javax.swing.JTextField();
         Search_btn = new javax.swing.JButton();
         Clear_btn = new javax.swing.JButton();
         MainMenu_btn = new javax.swing.JButton();
@@ -48,9 +48,9 @@ public class SearchProducts extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Products");
+        jLabel1.setText("Clubs");
 
-        jLabel2.setText("Vendor Code");
+        jLabel2.setText("Club Code");
 
         Search_btn.setText("Search");
         Search_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -80,7 +80,7 @@ public class SearchProducts extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setBorder(javax.swing.BorderFactory.createTitledBorder("Products"));
+        jTable1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -93,6 +93,7 @@ public class SearchProducts extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(jTable1);
+        jTable1.getAccessibleContext().setAccessibleName("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,12 +108,12 @@ public class SearchProducts extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(VendCode_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ClubCode_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Search_btn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Clear_btn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                         .addComponent(MainMenu_btn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Exit_btn)
@@ -129,7 +130,7 @@ public class SearchProducts extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(VendCode_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ClubCode_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Search_btn)
                     .addComponent(Clear_btn)
                     .addComponent(MainMenu_btn)
@@ -149,7 +150,7 @@ public class SearchProducts extends javax.swing.JFrame {
 
     private void MainMenu_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainMenu_btnActionPerformed
         // TODO add your handling code here:
-        MyStoreUI frm = new MyStoreUI();
+        Home frm = new Home();
         frm.setLocation(getLocation());
         frm.setSize(getSize());
         setVisible(false);
@@ -159,12 +160,12 @@ public class SearchProducts extends javax.swing.JFrame {
 
     private void Clear_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Clear_btnActionPerformed
         // TODO add your handling code here:
-        VendCode_TextField.setText("");
+        ClubCode_TextField.setText("");
     }//GEN-LAST:event_Clear_btnActionPerformed
 
     private void Search_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search_btnActionPerformed
         // TODO add your handling code here:
-        String Conn_url = "jdbc:mysql://localhost/invoicesdb?serverTimezone=UTC";
+        String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
         String Uid = "root";
         String PW = "marrakec";
 
@@ -173,13 +174,13 @@ public class SearchProducts extends javax.swing.JFrame {
             //System.out.println("connxion dazet");
 
             Statement stmt = conn.createStatement();
-            String qry = "SELECT ProdCode, Descript, Price FROM Product";
+            String qry = "SELECT ClubID, CName, CDescript, Balance FROM Club";
 
-            String VendCode = VendCode_TextField.getText();
+            String ClubID = ClubCode_TextField.getText();
 
             //if (!VendCode.equals("_all")) {
-            if (!VendCode.equals("")) {
-                qry += " WHERE VendCode = " + VendCode;
+            if (!ClubID.equals("")) {
+                qry += " WHERE ClubID = " + ClubID;
             }
             //}
             // Result Set get the result of the SQL query
@@ -205,7 +206,7 @@ public class SearchProducts extends javax.swing.JFrame {
 
             //}
         } catch (SQLException ex) {
-            Logger.getLogger(SearchProducts.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchClubs.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_Search_btnActionPerformed
 
@@ -226,30 +227,31 @@ public class SearchProducts extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SearchProducts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SearchClubs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SearchProducts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SearchClubs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SearchProducts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SearchClubs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SearchProducts.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SearchClubs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SearchProducts().setVisible(true);
+                new SearchClubs().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Clear_btn;
+    private javax.swing.JTextField ClubCode_TextField;
     private javax.swing.JButton Exit_btn;
     private javax.swing.JButton MainMenu_btn;
     private javax.swing.JButton Search_btn;
-    private javax.swing.JTextField VendCode_TextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
