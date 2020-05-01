@@ -55,7 +55,7 @@ public class LogIn extends javax.swing.JFrame {
             }
         });
 
-        Clear_jButton.setText("Cleat");
+        Clear_jButton.setText("Clear");
         Clear_jButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Clear_jButtonActionPerformed(evt);
