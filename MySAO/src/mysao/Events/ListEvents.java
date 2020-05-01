@@ -310,7 +310,7 @@ public class ListEvents extends javax.swing.JFrame {
                     + "JOIN Location as l ON l.LocID = e.EvtLocation ";
 
             String EvtCode = EvtCode_TextField.getText();
-            
+
             // Result Set get the result of the SQL query
             ResultSet rs = theQuery(qry);
 
@@ -350,7 +350,7 @@ public class ListEvents extends javax.swing.JFrame {
                     + "WHERE AdvApproval = 0 OR SAOApproval = 0";
 
             String EvtCode = EvtCode_TextField.getText();
-            
+
             // Result Set get the result of the SQL query
             ResultSet rs = theQuery(qry);
 
@@ -380,19 +380,17 @@ public class ListEvents extends javax.swing.JFrame {
 
     private void SearchDate_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchDate_jButtonActionPerformed
         // TODO add your handling code here:
-        
+
         try {
+            String startDate = StartDate_jTextField.getText();
+            String endDate = EndDate_jTextField1.getText();
 
             //String qry = "SELECT ClubID, CName, CDescript, Balance FROM Club";
             String qry = "SELECT e.EvtID, e.EvtName, e.EvtDescript, CONCAT(l.LocBldg, ' ', l.LocRoom) as 'Location', e.EvtStart, e.EvtEnd, c.CName, e.AdvApproval, e.SAOApproval "
                     + "FROM Event as e JOIN Club as c ON e.ClubID = c.ClubID "
-                    + "JOIN Location as l ON l.LocID = e.EvtLocation ";
+                    + "JOIN Location as l ON l.LocID = e.EvtLocation "
+                    + "WHERE EvtStart BETWEEN '" + startDate + "' AND '" + endDate + "'";
 
-            String startDate = StartDate_jTextField.getText();
-            String endDate = EndDate_jTextField1.getText();
-            
-            
-            
             // Result Set get the result of the SQL query
             ResultSet rs = theQuery(qry);
 

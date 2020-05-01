@@ -132,8 +132,10 @@ public class Search_A_Club extends javax.swing.JFrame {
     private void Delete_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Delete_jButtonActionPerformed
         // TODO add your handling code here:
             String ClubID = SearchParam_jTextField.getText();
-
-            theQuery("DELETE FROM Club WHERE ClubID = " + ClubID);
+            
+            String qry = "DELETE FROM Club WHERE ClubID = " + ClubID;
+            
+            theQuery(qry);
             
     }//GEN-LAST:event_Delete_jButtonActionPerformed
 
