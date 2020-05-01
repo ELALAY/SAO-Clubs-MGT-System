@@ -58,6 +58,11 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="Home_jButton" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="SearcClubID_jTextField" min="-2" pref="100" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="Display_jButton" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
@@ -70,7 +75,12 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="SearcClubID_jTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Display_jButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="14" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="ClubID_jTextField" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -179,6 +189,16 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Main Menu"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="SearcClubID_jTextField">
+    </Component>
+    <Component class="javax.swing.JButton" name="Display_jButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Display"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Display_jButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

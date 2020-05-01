@@ -20,7 +20,7 @@ public class ClubsCollection {
     String PW = "marrakec";
 
     public void DisplayClubInformation(int ClubID) {
-           
+
     }
 
     public ResultSet DisplayAllClubs(String ClubID) {

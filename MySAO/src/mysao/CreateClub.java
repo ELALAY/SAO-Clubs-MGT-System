@@ -12,7 +12,7 @@ import java.sql.*;
  *
  * @author hp
  */
-public class DisplayClubInformation extends javax.swing.JFrame {
+public class CreateClub extends javax.swing.JFrame {
 
     String curr_clubID;
     Club curr_Club;
@@ -23,15 +23,10 @@ public class DisplayClubInformation extends javax.swing.JFrame {
     String PW = "marrakec";
 
     /**
-     * Creates new form DisplayClubInformation
+     * Creates new form CreateClub
      */
-    public DisplayClubInformation() {
+    public CreateClub() {
         initComponents();
-    }
-
-    public DisplayClubInformation(ResultSet rs) {
-        initComponents();
-        this.rs = rs;
     }
 
     /**
@@ -57,8 +52,10 @@ public class DisplayClubInformation extends javax.swing.JFrame {
         Advisor_jTextField = new javax.swing.JTextField();
         Balance_jTextField = new javax.swing.JTextField();
         Save_jButton = new javax.swing.JButton();
-        Delete_jButton = new javax.swing.JButton();
+        Clear_jButton = new javax.swing.JButton();
         Home_jButton = new javax.swing.JButton();
+        CPass_jTextField1 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,10 +74,22 @@ public class DisplayClubInformation extends javax.swing.JFrame {
         jLabel7.setText("Balance");
 
         Save_jButton.setText("Save");
+        Save_jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Save_jButtonActionPerformed(evt);
+            }
+        });
 
-        Delete_jButton.setText("Delete");
+        Clear_jButton.setText("Clear");
+        Clear_jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Clear_jButtonActionPerformed(evt);
+            }
+        });
 
         Home_jButton.setText("Main Menu");
+
+        jLabel8.setText("Balance");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,28 +104,30 @@ public class DisplayClubInformation extends javax.swing.JFrame {
                         .addGap(46, 46, 46)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(Save_jButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Clear_jButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Home_jButton))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel7)
-                                    .addComponent(jLabel6))
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel8))
                                 .addGap(39, 39, 39)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CPass_jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Balance_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Advisor_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(CDate_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(CDescript_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(CName_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(ClubID_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Save_jButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Delete_jButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Home_jButton)))))
-                .addContainerGap(124, Short.MAX_VALUE))
+                                    .addComponent(ClubID_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,16 +162,46 @@ public class DisplayClubInformation extends javax.swing.JFrame {
                         .addComponent(Advisor_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Balance_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addGap(2, 2, 2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(CPass_jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Save_jButton)
-                    .addComponent(Delete_jButton)
+                    .addComponent(Clear_jButton)
                     .addComponent(Home_jButton))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void Clear_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Clear_jButtonActionPerformed
+        // TODO add your handling code here:
+        ClubID_jTextField.setText("");
+        CDescript_jTextField.setText("");
+        CName_jTextField.setText("");
+        CDate_jTextField.setText("");
+        Advisor_jTextField.setText("");
+        Balance_jTextField.setText("");
+        CPass_jTextField1.setText("");
+        
+    }//GEN-LAST:event_Clear_jButtonActionPerformed
+
+    private void Save_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Save_jButtonActionPerformed
+        // TODO add your handling code here:
+        String ClubID = ClubID_jTextField.getText();
+        String CDesc = CDescript_jTextField.getText();
+        String CName = CName_jTextField.getText();
+        String Cdate = CDate_jTextField.getText();
+        String Adv = Advisor_jTextField.getText();
+        String sBalance = Balance_jTextField.getText();
+        String CPass = CPass_jTextField1.getText();
+        
+    }//GEN-LAST:event_Save_jButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -203,8 +244,9 @@ public class DisplayClubInformation extends javax.swing.JFrame {
     private javax.swing.JTextField CDate_jTextField;
     private javax.swing.JTextField CDescript_jTextField;
     private javax.swing.JTextField CName_jTextField;
+    private javax.swing.JTextField CPass_jTextField1;
+    private javax.swing.JButton Clear_jButton;
     private javax.swing.JTextField ClubID_jTextField;
-    private javax.swing.JButton Delete_jButton;
     private javax.swing.JButton Home_jButton;
     private javax.swing.JButton Save_jButton;
     private javax.swing.JLabel jLabel1;
@@ -214,5 +256,6 @@ public class DisplayClubInformation extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     // End of variables declaration//GEN-END:variables
 }
