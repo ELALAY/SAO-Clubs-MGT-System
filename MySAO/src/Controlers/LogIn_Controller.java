@@ -31,8 +31,8 @@ public class LogIn_Controller {
 
             Statement stmt = (Statement) conn.createStatement();
             String qry = "SELECT * FROM OfficerSAO"
-                    + "WHERE SAOID = " + SAOID
-                    + "AND SAOPass = " + SAOPass;
+                    + " WHERE SAOID = '" + SAOID   +"'"
+                    + " AND SAOPass = '" + SAOPass +"';";
 
             // Result Set get the result of the SQL query
             ResultSet rs = stmt.executeQuery(qry);

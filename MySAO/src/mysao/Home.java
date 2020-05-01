@@ -28,30 +28,55 @@ public class Home extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        SearchClubs_jButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Home Menu");
+
+        SearchClubs_jButton.setText("Search Clubs");
+        SearchClubs_jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchClubs_jButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(332, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(SearchClubs_jButton)))
+                .addContainerGap(264, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap(273, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(SearchClubs_jButton)
+                .addContainerGap(222, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void SearchClubs_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchClubs_jButtonActionPerformed
+        // TODO add your handling code here:
+        SearchClubs frm = new SearchClubs();
+        frm.setLocation(getLocation());
+        frm.setSize(getSize());
+        setVisible(false);
+        frm.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_SearchClubs_jButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -89,6 +114,7 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton SearchClubs_jButton;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }
