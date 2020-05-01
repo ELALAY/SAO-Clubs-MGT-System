@@ -106,7 +106,7 @@ public class Home extends javax.swing.JFrame {
 
     private void CreateClub_jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateClub_jButton1ActionPerformed
         // TODO add your handling code here:
-        CreateClub frm = new CreateClub();
+        CreateNewClub frm = new CreateNewClub();
         frm.setLocation(getLocation());
         frm.setSize(getSize());
         setVisible(false);

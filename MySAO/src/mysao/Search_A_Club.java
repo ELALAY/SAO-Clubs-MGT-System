@@ -34,16 +34,17 @@ public class Search_A_Club extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Search_jButton = new javax.swing.JButton();
+        Display_jButton = new javax.swing.JButton();
         SearchParam_jTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         Modify_jButton = new javax.swing.JButton();
         Delete_jButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        Home_jButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Search_jButton.setText("Search");
+        Display_jButton.setText("Display");
 
         jLabel1.setText("Search Club");
 
@@ -58,6 +59,13 @@ public class Search_A_Club extends javax.swing.JFrame {
 
         jLabel2.setText("Enter Club ID");
 
+        Home_jButton.setText("Home");
+        Home_jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Home_jButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -65,10 +73,11 @@ public class Search_A_Club extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Home_jButton)
                     .addComponent(jLabel2)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(Search_jButton)
+                            .addComponent(Display_jButton)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(Modify_jButton)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -90,10 +99,12 @@ public class Search_A_Club extends javax.swing.JFrame {
                 .addComponent(SearchParam_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Search_jButton)
+                    .addComponent(Display_jButton)
                     .addComponent(Modify_jButton)
                     .addComponent(Delete_jButton))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Home_jButton)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
@@ -111,16 +122,25 @@ public class Search_A_Club extends javax.swing.JFrame {
             Statement stmt = conn.createStatement();
             String qry = "DELETE FROM Club WHERE ClubID = " + ClubID;
 
-            JOptionPane.showMessageDialog(this, "Deleted successfully!");
-
             // Result Set get the result of the SQL query
             ResultSet rs = stmt.executeQuery(qry);
 
+            JOptionPane.showMessageDialog(this, "Deleted successfully!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Oops! a problem occured");
         }
 
     }//GEN-LAST:event_Delete_jButtonActionPerformed
+
+    private void Home_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Home_jButtonActionPerformed
+        // TODO add your handling code here:
+        Home frm = new Home();
+        frm.setLocation(getLocation());
+        frm.setSize(getSize());
+        setVisible(false);
+        frm.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_Home_jButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,9 +179,10 @@ public class Search_A_Club extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Delete_jButton;
+    private javax.swing.JButton Display_jButton;
+    private javax.swing.JButton Home_jButton;
     private javax.swing.JButton Modify_jButton;
     private javax.swing.JTextField SearchParam_jTextField;
-    private javax.swing.JButton Search_jButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
