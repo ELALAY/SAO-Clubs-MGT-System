@@ -1,0 +1,65 @@
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+ul{
+list-style-type: none;
+}
+
+.navbar li {
+  float: left;
+}
+
+.navbar li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 17px 18px;
+  text-decoration: none;
+  font-size: large;
+}
+
+.navbar li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+
+
+body{
+background-image: url("https://image.freepik.com/free-vector/green-light-dark-grey-grey-metallic-curve-overlap-background_33869-1233.jpg");
+background-repeat: no-repeat;
+background-size: cover;
+}
+.center{
+float:right;
+vertical-align:top;
+}
+p{
+color: #DED3D3;
+font-size: x-large;
+}
+.fl{
+margin-left: 30px;
+}
+h1,h2,h3{
+font-size: xx-large;
+color: #DED3D3;
+}
+a:link {
+color: #DED3D3;
+}
+a:visited {
+color: #DED3D3;
+}
+.log{
+font-size: x-large;
+}
+table{
+color:white;
+}

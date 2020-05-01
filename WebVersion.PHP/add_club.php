@@ -2,11 +2,23 @@
 <!-- add_Club.php -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title>Aourid: Add Club</title>
+  <title>Add Club</title>
   <script type="text/JavaScript" src="js/forms.js"></script>
-</head>
-<body style= "background-color: palegreen;">
-
+   <script type="text/javascript" src="js/index.js"></script>
+        <link href="css/index.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+	<div class="navbar">
+	<ul>
+  		<li><a class ="active" href="welcomeadvisor.php">Home</a></li>
+  		<li><a href="eventsadvisor.php">Events</a></li>
+  		<li><a href="view_club_advisor.php">Clubs</a></li>
+		<li><a href="get_club_to_view.php">Members</a></li>
+  		<li style="float:right"><a href="contact.php">Contact</a></li>
+	</ul>
+	</div>
+<br/>
+<img src = "https://lh3.googleusercontent.com/proxy/mhzWA2-LZ2V6ZTmqU9-I31CtIuNcXf5wI9wiVYOgDpc6M-7bevVDf_Pj9QraSCeOgvLHQAmX-QeIeHiZdJNvtAO64U6D7Y0GdLBNSZOOcarK3jz5DIarjWMaR23BRzTmVB4" alt = "SAO" class="center" width = 100px height = 100px>
 <?php include_once 'includes/add_club.inc.php';?>
 
 <!-- Add Club form to be output when doc posted
@@ -30,6 +42,5 @@
         onclick="return reset()" /></td></tr>
     </table>
   </form>
-  <p>Go back to <a href="welcome.html">main page</a>.</p>
 </body>
 </html>

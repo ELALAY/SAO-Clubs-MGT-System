@@ -69,10 +69,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
  
       // Execute the prepared query.
       $sth->execute();
-      $message = "Evt succesfully added!";
+      $message = "Event succesfully added!";
       echo "<script type='text/javascript'>alert('$message');</script>";
 
-      header('Location: Events.html');
+      header('Location: eventsclubs.php');
       exit();
     }
   }
