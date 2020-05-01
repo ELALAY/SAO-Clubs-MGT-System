@@ -3,20 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mysao;
+package mysao.Clubs;
 
 import java.sql.*;
 import javax.swing.JOptionPane;
+import mysao.Home;
 
 /**
  *
  * @author hp
  */
 public class Search_A_Club extends javax.swing.JFrame {
-
-    String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
-    String Uid = "root";
-    String PW = "marrakec";
 
     /**
      * Creates new form Search_A_Club
@@ -110,26 +107,34 @@ public class Search_A_Club extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Delete_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Delete_jButtonActionPerformed
-        // TODO add your handling code here:
-
+    
+    private void theQuery(String qry) {
+        String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
+        String Uid = "root";
+        String PW = "marrakec";
+        
         try {
             Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
             //System.out.println("connxion dazet");
 
-            String ClubID = SearchParam_jTextField.getText();
-
             Statement stmt = conn.createStatement();
-            String qry = "DELETE FROM Club WHERE ClubID = " + ClubID;
-
             // Result Set get the result of the SQL query
             ResultSet rs = stmt.executeQuery(qry);
-
-            JOptionPane.showMessageDialog(this, "Deleted successfully!");
+            
+            JOptionPane.showMessageDialog(this, "Deleted!");
+            SearchParam_jTextField.setText("");
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Oops! a problem occured");
         }
+    }
 
+    private void Delete_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Delete_jButtonActionPerformed
+        // TODO add your handling code here:
+            String ClubID = SearchParam_jTextField.getText();
+
+            theQuery("DELETE FROM Club WHERE ClubID = " + ClubID);
+            
     }//GEN-LAST:event_Delete_jButtonActionPerformed
 
     private void Home_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Home_jButtonActionPerformed

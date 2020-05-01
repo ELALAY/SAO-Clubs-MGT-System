@@ -3,25 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mysao;
+package mysao.Clubs;
 
 import java.sql.*;
 import javax.swing.JOptionPane;
+import mysao.Home;
 
 /**
  *
  * @author hp
  */
-public class CreateNewClub extends javax.swing.JFrame {
-
-    String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
-    String Uid = "root";
-    String PW = "marrakec";
+public class NewClub extends javax.swing.JFrame {
 
     /**
      * Creates new form CreateNewClub
      */
-    public CreateNewClub() {
+    public NewClub() {
         initComponents();
     }
 
@@ -50,6 +47,7 @@ public class CreateNewClub extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         Home_jButton = new javax.swing.JButton();
+        Clear_jButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,6 +78,13 @@ public class CreateNewClub extends javax.swing.JFrame {
         Home_jButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Home_jButtonActionPerformed(evt);
+            }
+        });
+
+        Clear_jButton.setText("Clear");
+        Clear_jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Clear_jButtonActionPerformed(evt);
             }
         });
 
@@ -122,7 +127,9 @@ public class CreateNewClub extends javax.swing.JFrame {
                         .addGap(67, 67, 67)
                         .addComponent(Save_jButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Home_jButton))
+                        .addComponent(Home_jButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Clear_jButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(jLabel8)))
@@ -161,12 +168,33 @@ public class CreateNewClub extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Save_jButton)
-                    .addComponent(Home_jButton))
+                    .addComponent(Home_jButton)
+                    .addComponent(Clear_jButton))
                 .addContainerGap(60, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private ResultSet theQuery(String qry) {
+        String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
+        String Uid = "root";
+        String PW = "marrakec";
+
+        try {
+            Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
+            //System.out.println("connxion dazet");
+
+            Statement stmt = (Statement) conn.createStatement();
+
+            // Result Set get the result of the SQL query
+            ResultSet rs = stmt.executeQuery(qry);
+            return rs;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
+        }
+        return null;
+    }
 
     private void Save_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Save_jButtonActionPerformed
         // TODO add your handling code here:
@@ -177,24 +205,18 @@ public class CreateNewClub extends javax.swing.JFrame {
         String Adv = Advisor_jTextField.getText();
         String CPass = CPass_jPasswordField.getText();
 
-        try {
-            Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
-            //System.out.println("connxion dazet");
+        String qry = "INSERT INTO Club "
+                + "(ClubID, CName, CDescript, CcreatoinDate, AdvID, CPass) "
+                + "VALUES "
+                + "(" + ClubID + ", '" + CName + "', '" + CDesc + "', "
+                + "'" + Cdate + "', " + Adv + ", '" + CPass + "')";
 
-            Statement stmt = conn.createStatement();
-            String qry = "INSERT INTO Club "
-                    + "(ClubID, CName, CDescript, CcreatoinDate, AdvID, CPass)"
-                    + "VALUES"
-                    + "(" + ClubID + ", '" + CName + "', '" + CDesc + "', "
-                    + "'" + Cdate + "', " + Adv + ", '" + CPass + "')";
+        // Result Set get the result of the SQL query
+        ResultSet rs = theQuery(qry);
+        
+        JOptionPane.showMessageDialog(this, CName + " Added successfully!");
+        Clear_Fields();
 
-            // Result Set get the result of the SQL query
-            ResultSet rs = stmt.executeQuery(qry);
-
-            JOptionPane.showMessageDialog(this, CName + " Added successfully!");
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Oops! a problem occured");
-        }
     }//GEN-LAST:event_Save_jButtonActionPerformed
 
     private void Home_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Home_jButtonActionPerformed
@@ -206,6 +228,20 @@ public class CreateNewClub extends javax.swing.JFrame {
         frm.setVisible(true);
         dispose();
     }//GEN-LAST:event_Home_jButtonActionPerformed
+
+    private void Clear_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Clear_jButtonActionPerformed
+        // TODO add your handling code here:
+        Clear_Fields();
+    }//GEN-LAST:event_Clear_jButtonActionPerformed
+
+    private void Clear_Fields() {
+        ClubID_jTextField.setText("");
+        CName_jTextField.setText("");
+        CDescript_jTextField.setText("");
+        CDate_jTextField.setText("");
+        Advisor_jTextField.setText("");
+        CPass_jPasswordField.setText("");
+    }
 
     /**
      * @param args the command line arguments
@@ -224,20 +260,21 @@ public class CreateNewClub extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CreateNewClub.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewClub.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CreateNewClub.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewClub.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CreateNewClub.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewClub.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CreateNewClub.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NewClub.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CreateNewClub().setVisible(true);
+                new NewClub().setVisible(true);
             }
         });
     }
@@ -248,6 +285,7 @@ public class CreateNewClub extends javax.swing.JFrame {
     private javax.swing.JTextField CDescript_jTextField;
     private javax.swing.JTextField CName_jTextField;
     private javax.swing.JPasswordField CPass_jPasswordField;
+    private javax.swing.JButton Clear_jButton;
     private javax.swing.JTextField ClubID_jTextField;
     private javax.swing.JButton Home_jButton;
     private javax.swing.JButton Save_jButton;

@@ -5,6 +5,10 @@
  */
 package mysao;
 
+import mysao.Clubs.NewClub;
+import mysao.Clubs.ListClubs;
+import mysao.Clubs.Search_A_Club;
+
 /**
  *
  * @author hp
@@ -96,7 +100,7 @@ public class Home extends javax.swing.JFrame {
 
     private void SearchClubs_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchClubs_jButtonActionPerformed
         // TODO add your handling code here:
-        SearchClubs frm = new SearchClubs();
+        ListClubs frm = new ListClubs();
         frm.setLocation(getLocation());
         frm.setSize(getSize());
         setVisible(false);
@@ -106,7 +110,7 @@ public class Home extends javax.swing.JFrame {
 
     private void CreateClub_jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateClub_jButton1ActionPerformed
         // TODO add your handling code here:
-        CreateNewClub frm = new CreateNewClub();
+        NewClub frm = new NewClub();
         frm.setLocation(getLocation());
         frm.setSize(getSize());
         setVisible(false);

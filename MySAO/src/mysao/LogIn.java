@@ -10,7 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author hp
@@ -113,28 +112,37 @@ public class LogIn extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void LogIn_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogIn_ButtonActionPerformed
-        // TODO add your handling code here:
+   private ResultSet theQuery(String qry) {
         String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
         String Uid = "root";
         String PW = "marrakec";
 
-        String temp_UserID = UserID_jTextField.getText();
-        String temp_password = jPasswordField.getText();
         try {
             Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
             //System.out.println("connxion dazet");
 
             Statement stmt = (Statement) conn.createStatement();
-            String qry = "SELECT * FROM OfficerSAO"
-                    + " WHERE SAOID = '" + temp_UserID + "'"
-                    + " AND SAOPass = '" + temp_password + "';";
 
             // Result Set get the result of the SQL query
             ResultSet rs = stmt.executeQuery(qry);
+            return rs;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
+        }
+        return null;
+    }
+    private void LogIn_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogIn_ButtonActionPerformed
+        // TODO add your handling code here:
 
-//boolean logged = login_con.Login(temp_UserID, temp_password);
+        String temp_UserID = UserID_jTextField.getText();
+        String temp_password = jPasswordField.getText();
+        try {   
+            ResultSet rs = theQuery("SELECT * FROM OfficerSAO"
+                    + " WHERE SAOID = '" + temp_UserID + "'"
+                    + " AND SAOPass = '" + temp_password + "';");
+            //boolean logged = login_con.Login(temp_UserID, temp_password);
             boolean logged = false;
+
             while (rs.next()) {
                 logged = true;
                 //System.out.println(temp_pass);
@@ -150,10 +158,9 @@ public class LogIn extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Incorrect User ID or Password");
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(LogIn.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
 
 
     }//GEN-LAST:event_LogIn_ButtonActionPerformed
