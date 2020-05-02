@@ -35,7 +35,6 @@ public class Search_A_Club extends javax.swing.JFrame {
         Display_jButton = new javax.swing.JButton();
         SearchParam_jTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        Modify_jButton = new javax.swing.JButton();
         Delete_jButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         Home_jButton = new javax.swing.JButton();
@@ -50,8 +49,6 @@ public class Search_A_Club extends javax.swing.JFrame {
         });
 
         jLabel1.setText("Search Club");
-
-        Modify_jButton.setText("Modify");
 
         Delete_jButton.setText("Delete");
         Delete_jButton.addActionListener(new java.awt.event.ActionListener() {
@@ -76,19 +73,17 @@ public class Search_A_Club extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Home_jButton)
                     .addComponent(jLabel2)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(Display_jButton)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(Modify_jButton)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(Delete_jButton))
-                        .addComponent(SearchParam_jTextField)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(80, 80, 80)
-                            .addComponent(jLabel1))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Display_jButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Delete_jButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Home_jButton))
+                    .addComponent(SearchParam_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(jLabel1)))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -103,11 +98,9 @@ public class Search_A_Club extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Display_jButton)
-                    .addComponent(Modify_jButton)
-                    .addComponent(Delete_jButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Home_jButton)
-                .addContainerGap(35, Short.MAX_VALUE))
+                    .addComponent(Delete_jButton)
+                    .addComponent(Home_jButton))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         pack();
@@ -125,7 +118,7 @@ public class Search_A_Club extends javax.swing.JFrame {
 
             Statement stmt = conn.createStatement();
             // Result Set get the result of the SQL query
-            ResultSet rs = stmt.executeQuery(qry);
+            stmt.executeUpdate(qry);
             
             JOptionPane.showMessageDialog(this, "Deleted!");
             SearchParam_jTextField.setText("");
@@ -206,7 +199,6 @@ public class Search_A_Club extends javax.swing.JFrame {
     private javax.swing.JButton Delete_jButton;
     private javax.swing.JButton Display_jButton;
     private javax.swing.JButton Home_jButton;
-    private javax.swing.JButton Modify_jButton;
     private javax.swing.JTextField SearchParam_jTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
