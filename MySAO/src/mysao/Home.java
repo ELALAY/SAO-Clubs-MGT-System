@@ -35,7 +35,6 @@ public class Home extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         SearchClubs_jButton = new javax.swing.JButton();
         CreateClub_jButton1 = new javax.swing.JButton();
-        Search_jButton = new javax.swing.JButton();
         ListEvent_jButton = new javax.swing.JButton();
         Exit_jButton = new javax.swing.JButton();
         LogOut_jButton = new javax.swing.JButton();
@@ -56,13 +55,6 @@ public class Home extends javax.swing.JFrame {
         CreateClub_jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CreateClub_jButton1ActionPerformed(evt);
-            }
-        });
-
-        Search_jButton.setText("Search Club");
-        Search_jButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Search_jButtonActionPerformed(evt);
             }
         });
 
@@ -98,20 +90,17 @@ public class Home extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ListEvent_jButton)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(SearchClubs_jButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Search_jButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CreateClub_jButton1))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(ListEvent_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(SearchClubs_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(12, 12, 12)
+                        .addComponent(CreateClub_jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(LogOut_jButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Exit_jButton)))
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(161, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,7 +110,6 @@ public class Home extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SearchClubs_jButton)
-                    .addComponent(Search_jButton)
                     .addComponent(CreateClub_jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ListEvent_jButton)
@@ -154,16 +142,6 @@ public class Home extends javax.swing.JFrame {
         frm.setVisible(true);
         dispose();
     }//GEN-LAST:event_CreateClub_jButton1ActionPerformed
-
-    private void Search_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search_jButtonActionPerformed
-        // TODO add your handling code here:
-        Search_A_Club frm = new Search_A_Club();
-        frm.setLocation(getLocation());
-        frm.setSize(getSize());
-        setVisible(false);
-        frm.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_Search_jButtonActionPerformed
 
     private void ListEvent_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListEvent_jButtonActionPerformed
         // TODO add your handling code here:
@@ -231,7 +209,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton ListEvent_jButton;
     private javax.swing.JButton LogOut_jButton;
     private javax.swing.JButton SearchClubs_jButton;
-    private javax.swing.JButton Search_jButton;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

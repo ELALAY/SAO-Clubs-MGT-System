@@ -77,6 +77,7 @@ public class ListClubs extends javax.swing.JFrame {
         ClearClub_jButton = new javax.swing.JButton();
         CPass_jTextField = new javax.swing.JTextField();
         Balance_jTextField = new javax.swing.JTextField();
+        Delete_jButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -160,6 +161,13 @@ public class ListClubs extends javax.swing.JFrame {
             }
         });
 
+        Delete_jButton.setText("Delete");
+        Delete_jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Delete_jButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -229,7 +237,8 @@ public class ListClubs extends javax.swing.JFrame {
                         .addGap(0, 12, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(Update_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ClearClub_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(ClearClub_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Delete_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(44, 44, 44))))
         );
         layout.setVerticalGroup(
@@ -260,7 +269,8 @@ public class ListClubs extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(CDescript_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CDescript_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Delete_jButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -278,7 +288,7 @@ public class ListClubs extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(CPass_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
@@ -448,6 +458,35 @@ public class ListClubs extends javax.swing.JFrame {
         
     }//GEN-LAST:event_Update_jButtonActionPerformed
 
+    private void Delete_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Delete_jButtonActionPerformed
+        // TODO add your handling code here:
+        String ClubID = ClubID_jTextField.getText();
+        String CName = CName_jTextField.getText();
+        
+        String qry = "DELETE FROM Club WHERE ClubID = " + ClubID;
+
+        String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
+        String Uid = "root";
+        String PW = "marrakec";
+        
+        try {
+            Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
+            //System.out.println("connxion dazet");
+
+            Statement stmt = (Statement) conn.createStatement();
+
+            // Result Set get the result of the SQL query
+            stmt.executeUpdate(qry);
+            
+            JOptionPane.showMessageDialog(this,"The Club "+ CName + " Deleted successfully!"); 
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ListClubs.class.getName()).log(Level.SEVERE, null, ex);
+           JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
+        }
+
+    }//GEN-LAST:event_Delete_jButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -498,6 +537,7 @@ public class ListClubs extends javax.swing.JFrame {
     private javax.swing.JButton Clear_btn;
     private javax.swing.JTextField ClubCode_TextField;
     private javax.swing.JTextField ClubID_jTextField;
+    private javax.swing.JButton Delete_jButton;
     private javax.swing.JButton Exit_btn;
     private javax.swing.JButton MainMenu_btn;
     private javax.swing.JButton Search_btn;
