@@ -205,11 +205,11 @@ public class NewClub extends javax.swing.JFrame {
         String Adv = Advisor_jTextField.getText();
         String CPass = CPass_jPasswordField.getText();
 
-        String qry = "INSERT INTO Club "
-                + "(ClubID, CName, CDescript, CcreatoinDate, AdvID, CPass) "
-                + "VALUES "
-                + "(" + ClubID + ", '" + CName + "', '" + CDesc + "', "
-                + "'" + Cdate + "', " + Adv + ", '" + CPass + "')";
+        String qry = "INSERT INTO Club VALUES "
+                + "(" 
+                + ClubID + ", '" + CName + "', '" + CDesc + "', "
+                + "'" + Cdate + "', " + Adv + ", 4000.0, "  
+                + "'" + CPass + "')";
 
         // Result Set get the result of the SQL query
         ResultSet rs = theQuery(qry);

@@ -5,6 +5,7 @@
  */
 package mysao.Clubs;
 
+import Entities.Club;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import mysao.Home;
@@ -42,6 +43,11 @@ public class Search_A_Club extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         Display_jButton.setText("Display");
+        Display_jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Display_jButtonActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Search Club");
 
@@ -148,6 +154,18 @@ public class Search_A_Club extends javax.swing.JFrame {
         frm.setVisible(true);
         dispose();
     }//GEN-LAST:event_Home_jButtonActionPerformed
+
+    private void Display_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Display_jButtonActionPerformed
+        // TODO add your handling code here:
+        String clubic_int = SearchParam_jTextField.getText();
+        
+        ListClubs frm = new ListClubs(clubic_int);
+        frm.setLocation(getLocation());
+        frm.setSize(getSize());
+        setVisible(false);
+        frm.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_Display_jButtonActionPerformed
 
     /**
      * @param args the command line arguments
