@@ -188,8 +188,8 @@ public class NewClub extends javax.swing.JFrame {
             Statement stmt = (Statement) conn.createStatement();
 
             // Result Set get the result of the SQL query
-            ResultSet rs = stmt.executeQuery(qry);
-            return rs;
+            stmt.executeUpdate(qry);
+            //return rs;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
         }
