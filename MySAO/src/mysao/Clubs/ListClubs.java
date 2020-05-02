@@ -17,7 +17,9 @@ import mysao.Home;
  * @author hp
  */
 public class ListClubs extends javax.swing.JFrame {
+
     String ClubID_Searched;
+
     /**
      * Creates new form SearchProducts
      */
@@ -28,13 +30,13 @@ public class ListClubs extends javax.swing.JFrame {
         ((DefaultTableModel) (jTable1.getModel())).setRowCount(0);
         ((DefaultTableModel) (jTable1.getModel())).setColumnCount(0);
     }
-    
+
     public ListClubs(String ClubID_Searched) {
         initComponents();
         this.ClubID_Searched = ClubID_Searched;
-        
+
         ClubCode_TextField.setText((String) ClubID_Searched);
-        
+
         //Initialize the JTable data model
         ((DefaultTableModel) (jTable1.getModel())).setRowCount(0);
         ((DefaultTableModel) (jTable1.getModel())).setColumnCount(0);
@@ -306,7 +308,7 @@ public class ListClubs extends javax.swing.JFrame {
         }
         return rs;
     }
-    
+
     private void MainMenu_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainMenu_btnActionPerformed
         // TODO add your handling code here:
         Home frm = new Home();
@@ -366,12 +368,11 @@ public class ListClubs extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-        
+
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        
+
         int rowIndex = jTable1.getSelectedRow();
-        
-        
+
         ClubID_jTextField.setText(model.getValueAt(rowIndex, 0).toString());
         CName_jTextField.setText(model.getValueAt(rowIndex, 1).toString());
         CDescript_jTextField.setText(model.getValueAt(rowIndex, 2).toString());
@@ -379,12 +380,11 @@ public class ListClubs extends javax.swing.JFrame {
         Advisor_jTextField.setText(model.getValueAt(rowIndex, 4).toString());
         Balance_jTextField.setText(model.getValueAt(rowIndex, 5).toString());
         CPass_jTextField.setText(model.getValueAt(rowIndex, 6).toString());
-       
-        
-        
+
+
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void Clear_Fields(){
+    private void Clear_Fields() {
         ClubID_jTextField.setText("");
         CName_jTextField.setText("");
         CDescript_jTextField.setText("");
@@ -393,16 +393,16 @@ public class ListClubs extends javax.swing.JFrame {
         Balance_jTextField.setText((""));
         CPass_jTextField.setText("");
     }
-    
+
     private void ClearClub_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearClub_jButtonActionPerformed
         // TODO add your handling code here:
         Clear_Fields();
-        
+
     }//GEN-LAST:event_ClearClub_jButtonActionPerformed
 
     private void Update_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Update_jButtonActionPerformed
         // TODO add your handling code here:
-        
+
         String ClubID = ClubID_jTextField.getText();
         String CDesc = CDescript_jTextField.getText();
         String CName = CName_jTextField.getText();
@@ -412,21 +412,40 @@ public class ListClubs extends javax.swing.JFrame {
         String CPass = CPass_jTextField.getText();
 
         String qry = "UPDATE Club "
-                + "SET " 
-                + "ClubID = "+ ClubID + ", "
+                + "SET "
+                + "ClubID = " + ClubID + ", "
                 + "CName = '" + CName + "', "
-                + "CDescript = '" + CDesc + "', "
-                + "CDate = '" + Cdate + "', "
+                + " CDescript = '" + CDesc + "', "
+                + "CcreationDate = '" + Cdate + "', "
                 + "AdvID = " + Adv + ", "
-                + "Balance = " + 4000.0 + ", "  
+                + "Balance = 4000.0, "
                 + "CPass = '" + CPass + "' "
                 + "WHERE ClubID = " + ClubID;
 
-        // Result Set get the result of the SQL query
-        ResultSet rs = theQuery(qry);
+        String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
+        String Uid = "root";
+        String PW = "marrakec";
+        ResultSet rs = null;
         
-        JOptionPane.showMessageDialog(this, CName + " Added successfully!");
-        Clear_Fields();
+        try {
+            Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
+            //System.out.println("connxion dazet");
+
+            Statement stmt = (Statement) conn.createStatement();
+
+            // Result Set get the result of the SQL query
+            stmt.executeUpdate(qry);
+            
+            JOptionPane.showMessageDialog(this, CName + " Added successfully!"); 
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ListClubs.class.getName()).log(Level.SEVERE, null, ex);
+           JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
+        }
+
+        // Result Set get the result of the SQL query
+        //ResultSet rs = theQuery(qry);
+        
     }//GEN-LAST:event_Update_jButtonActionPerformed
 
     /**
