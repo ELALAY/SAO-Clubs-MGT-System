@@ -20,6 +20,8 @@ public class NewClub extends javax.swing.JFrame {
      */
     public NewClub() {
         initComponents();
+        FillAdvCombo();
+        
     }
 
     /**
@@ -40,7 +42,6 @@ public class NewClub extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         CDate_jTextField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        Advisor_jTextField = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         CPass_jPasswordField = new javax.swing.JPasswordField();
         Save_jButton = new javax.swing.JButton();
@@ -48,6 +49,7 @@ public class NewClub extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         Home_jButton = new javax.swing.JButton();
         Clear_jButton = new javax.swing.JButton();
+        Adv_jComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,7 +63,7 @@ public class NewClub extends javax.swing.JFrame {
 
         jLabel6.setText("Advisor");
 
-        jLabel7.setText("Passwor");
+        jLabel7.setText("Password");
 
         Save_jButton.setText("Save");
         Save_jButton.addActionListener(new java.awt.event.ActionListener() {
@@ -88,6 +90,8 @@ public class NewClub extends javax.swing.JFrame {
             }
         });
 
+        Adv_jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -110,17 +114,17 @@ public class NewClub extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(CDescript_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Advisor_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(39, 39, 39)
                                 .addComponent(CDate_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel7)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel6))
                                 .addGap(60, 60, 60)
-                                .addComponent(CPass_jPasswordField)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CPass_jPasswordField)
+                                    .addComponent(Adv_jComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5))
                     .addGroup(layout.createSequentialGroup()
@@ -160,7 +164,7 @@ public class NewClub extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(Advisor_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Adv_jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -170,12 +174,39 @@ public class NewClub extends javax.swing.JFrame {
                     .addComponent(Save_jButton)
                     .addComponent(Home_jButton)
                     .addComponent(Clear_jButton))
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    private void FillAdvCombo(){
+        String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
+        String Uid = "root";
+        String PW = "marrakec";
+        ResultSet rs = null;
+        
+        String qry = "SELECT CONCAT(AdvID, ', ', AdvFname, ' ', AdvLname) "
+                + "as 'Advisor' FROM Advisor";
+        
+        try {
+            Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
+            //System.out.println("connxion dazet");
 
+            Statement stmt = (Statement) conn.createStatement();
+
+            // Result Set get the result of the SQL query
+            rs= stmt.executeQuery(qry);
+            
+            while(rs.next()) {
+                String Adv = rs.getString("Advisor");
+                Adv_jComboBox.addItem(Adv);
+            }
+            //return rs;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
+        }
+    } 
+            
     private ResultSet theQuery(String qry) {
         String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
         String Uid = "root";
@@ -189,6 +220,7 @@ public class NewClub extends javax.swing.JFrame {
 
             // Result Set get the result of the SQL query
             stmt.executeUpdate(qry);
+            JOptionPane.showMessageDialog(this, " Added successfully!");
             //return rs;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
@@ -202,8 +234,10 @@ public class NewClub extends javax.swing.JFrame {
         String CDesc = CDescript_jTextField.getText();
         String CName = CName_jTextField.getText();
         String Cdate = CDate_jTextField.getText();
-        String Adv = Advisor_jTextField.getText();
+        //String Adv = Advisor_jTextField.getText();
         String CPass = CPass_jPasswordField.getText();
+        String Adv = Adv_jComboBox.getSelectedItem().toString();
+        System.out.println("advisor: " +Adv);
 
         String qry = "INSERT INTO Club VALUES "
                 + "(" 
@@ -214,7 +248,7 @@ public class NewClub extends javax.swing.JFrame {
         // Result Set get the result of the SQL query
         ResultSet rs = theQuery(qry);
         
-        JOptionPane.showMessageDialog(this, CName + " Added successfully!");
+        
         Clear_Fields();
 
     }//GEN-LAST:event_Save_jButtonActionPerformed
@@ -241,6 +275,7 @@ public class NewClub extends javax.swing.JFrame {
         CDate_jTextField.setText("");
         Advisor_jTextField.setText("");
         CPass_jPasswordField.setText("");
+        Adv_jComboBox.setSelectedIndex(0);
     }
 
     /**
@@ -280,7 +315,7 @@ public class NewClub extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Advisor_jTextField;
+    private javax.swing.JComboBox<String> Adv_jComboBox;
     private javax.swing.JTextField CDate_jTextField;
     private javax.swing.JTextField CDescript_jTextField;
     private javax.swing.JTextField CName_jTextField;
