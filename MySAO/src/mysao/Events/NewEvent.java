@@ -249,19 +249,20 @@ public class NewEvent extends javax.swing.JFrame {
 
         int SaoApd = 0;
         if (SAOAPD_jCheckBox.isSelected()) {
-            AdvApd = 1;
+            SaoApd = 1;
         }
 
-        String qry = "INSERT INTO Club VALUES "
+        String qry = "INSERT INTO Event VALUES "
                 + "("
                 + EvtID +           ", "
-                + "'" + EvtName +   "', "
-                + "'" + EvtDesc +   "', "
+                + " '" + EvtName +   "', "
+                + " '" + EvtDesc +   "', "
                 + EvtBudget +       ", "
-                + "'" + EvtLoc +    "', "
-                + "'" + EvtStart +  "', "
-                + "'" + EvtEnd + "', "
-                + ClubID + ", " + AdvApd + ", "+ SaoApd;
+                + " '" + EvtLoc +    "', "
+                + " '" + EvtStart +  "', "
+                + " '" + EvtEnd + "', "
+                + ClubID + ", " + AdvApd + ", "+ SaoApd
+                + ")";
 
         // Result Set get the result of the SQL query
         ResultSet rs = theQuery(qry);

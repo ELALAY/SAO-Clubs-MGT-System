@@ -198,6 +198,11 @@ public class ListEvents extends javax.swing.JFrame {
         });
 
         Delete_jButton.setText("Delete");
+        Delete_jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Delete_jButtonActionPerformed(evt);
+            }
+        });
 
         Dialog_jLabel.setText("Results:");
 
@@ -642,11 +647,13 @@ public class ListEvents extends javax.swing.JFrame {
         if (AdvAPD_jCheckBox.isSelected()) {
             AdvApd = 1;
         }
+        System.out.println("AdvApd = "+ AdvApd );
 
         int SaoApd = 0;
         if (SAOAPD_jCheckBox.isSelected()) {
-            AdvApd = 1;
+            SaoApd = 1;
         }
+        System.out.println("AdvApd = "+ SaoApd );
 
         String qry = "UPDATE Event "
                 + "SET "
@@ -660,7 +667,7 @@ public class ListEvents extends javax.swing.JFrame {
                 + "ClubID       = " + ClubID + ", "
                 + "AdvApproval  = " + AdvApd + ", "
                 + "SAOApproval  = " + SaoApd
-                + "WHERE EvtID  = " + EvtID;
+                + " WHERE EvtID  = " + EvtID;
 
         String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
         String Uid = "root";
@@ -684,6 +691,34 @@ public class ListEvents extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_Update_jButtonActionPerformed
+
+    private void Delete_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Delete_jButtonActionPerformed
+        // TODO add your handling code here:
+        String EvtID = EventID_jTextField.getText();
+        
+        String qry = "DELETE FROM Event WHERE EvtID = " +EvtID;
+
+        String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
+        String Uid = "root";
+        String PW = "marrakec";
+        //ResultSet rs = null;
+
+        try {
+            Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
+            //System.out.println("connxion dazet");
+
+            Statement stmt = (Statement) conn.createStatement();
+
+            // Result Set get the result of the SQL query
+            stmt.executeUpdate(qry);
+
+            JOptionPane.showMessageDialog(this, "Deleted successfully!");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ListEvents.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
+        }
+    }//GEN-LAST:event_Delete_jButtonActionPerformed
 
     /**
      * @param args the command line arguments
