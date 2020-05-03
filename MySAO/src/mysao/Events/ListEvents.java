@@ -78,6 +78,7 @@ public class ListEvents extends javax.swing.JFrame {
         Update_jButton = new javax.swing.JButton();
         Clear_jButton = new javax.swing.JButton();
         Delete_jButton = new javax.swing.JButton();
+        Dialog_jLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -198,6 +199,8 @@ public class ListEvents extends javax.swing.JFrame {
 
         Delete_jButton.setText("Delete");
 
+        Dialog_jLabel.setText("Results:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -274,6 +277,10 @@ public class ListEvents extends javax.swing.JFrame {
                     .addComponent(Clear_jButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Delete_jButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(29, 29, 29))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Dialog_jLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,7 +293,7 @@ public class ListEvents extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(MainMenu_btn)
                             .addComponent(Exit_btn))
-                        .addGap(18, 20, Short.MAX_VALUE)
+                        .addGap(18, 18, Short.MAX_VALUE)
                         .addComponent(AllEvts_jButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(UnApprovedEvt_jButton))
@@ -312,7 +319,9 @@ public class ListEvents extends javax.swing.JFrame {
                             .addComponent(SearchDate_jButton))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(4, 4, 4)
+                .addComponent(Dialog_jLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(EventID_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -438,7 +447,7 @@ public class ListEvents extends javax.swing.JFrame {
                 dtm.addRow(row);
             }
             jTable1.setModel(dtm);
-
+            Dialog_jLabel.setText("Resulting Rows: " + jTable1.getRowCount());
             //}
         } catch (SQLException ex) {
             Logger.getLogger(ListEvents.class.getName()).log(Level.SEVERE, null, ex);
@@ -477,7 +486,7 @@ public class ListEvents extends javax.swing.JFrame {
                 dtm.addRow(row);
             }
             jTable1.setModel(dtm);
-
+            Dialog_jLabel.setText("Resulting Rows: " + jTable1.getRowCount());
             //}
         } catch (SQLException ex) {
             Logger.getLogger(ListEvents.class.getName()).log(Level.SEVERE, null, ex);
@@ -518,6 +527,7 @@ public class ListEvents extends javax.swing.JFrame {
                 dtm.addRow(row);
             }
             jTable1.setModel(dtm);
+            Dialog_jLabel.setText("Resulting Rows: " + jTable1.getRowCount());
 
             //}
         } catch (SQLException ex) {
@@ -560,6 +570,7 @@ public class ListEvents extends javax.swing.JFrame {
                 dtm.addRow(row);
             }
             jTable1.setModel(dtm);
+            Dialog_jLabel.setText("Resulting Rows: " + jTable1.getRowCount());
 
             //}
         } catch (SQLException ex) {
@@ -618,14 +629,14 @@ public class ListEvents extends javax.swing.JFrame {
 
     private void Update_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Update_jButtonActionPerformed
         // TODO add your handling code here:
-        String EvtID     = EventID_jTextField.getText();
-        String EvtName   = EvtName_jTextField.getText();
-        String EvtDesc   = EvtDesc_jTextField2.getText();
+        String EvtID = EventID_jTextField.getText();
+        String EvtName = EvtName_jTextField.getText();
+        String EvtDesc = EvtDesc_jTextField2.getText();
         String EvtBudget = EvtBudget_jTextField3.getText();
-        String EvtLoc    = EvtLocation_jTextField5.getText();
-        String EvtStart  = EvtStart_jTextField6.getText();
-        String EvtEnd    = EvtEnd_jTextField7.getText();
-        String ClubID    = ClubID_jTextField4.getText();
+        String EvtLoc = EvtLocation_jTextField5.getText();
+        String EvtStart = EvtStart_jTextField6.getText();
+        String EvtEnd = EvtEnd_jTextField7.getText();
+        String ClubID = ClubID_jTextField4.getText();
 
         int AdvApd = 0;
         if (AdvAPD_jCheckBox.isSelected()) {
@@ -639,17 +650,17 @@ public class ListEvents extends javax.swing.JFrame {
 
         String qry = "UPDATE Event "
                 + "SET "
-                + "EvtID        = "   + EvtID     + ", "
-                + "EvtName      = '"  + EvtName   + "', "
-                + "EvtDescript  = '"  + EvtDesc   + "', "
-                + "EvtBudget    = "   + EvtBudget + ", "
-                + "EvtLocation  = '"  + EvtLoc    + "', "
-                + "EvtStart     = '"  + EvtStart  + "', "
-                + "EvtEnd       = '"  + EvtEnd    + "', "
-                + "ClubID       = "   + ClubID    + ", "
-                + "AdvApproval  = "   + AdvApd    + ", "
-                + "SAOApproval  = "   + SaoApd    
-                + "WHERE EvtID  = "   + EvtID     ;
+                + "EvtID        = " + EvtID + ", "
+                + "EvtName      = '" + EvtName + "', "
+                + "EvtDescript  = '" + EvtDesc + "', "
+                + "EvtBudget    = " + EvtBudget + ", "
+                + "EvtLocation  = '" + EvtLoc + "', "
+                + "EvtStart     = '" + EvtStart + "', "
+                + "EvtEnd       = '" + EvtEnd + "', "
+                + "ClubID       = " + ClubID + ", "
+                + "AdvApproval  = " + AdvApd + ", "
+                + "SAOApproval  = " + SaoApd
+                + "WHERE EvtID  = " + EvtID;
 
         String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
         String Uid = "root";
@@ -718,6 +729,7 @@ public class ListEvents extends javax.swing.JFrame {
     private javax.swing.JButton Clear_jButton;
     private javax.swing.JTextField ClubID_jTextField4;
     private javax.swing.JButton Delete_jButton;
+    private javax.swing.JLabel Dialog_jLabel;
     private javax.swing.JTextField EndDate_jTextField1;
     private javax.swing.JTextField EventID_jTextField;
     private javax.swing.JTextField EvtBudget_jTextField3;

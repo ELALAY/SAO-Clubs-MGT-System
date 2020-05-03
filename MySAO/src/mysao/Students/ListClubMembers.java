@@ -43,6 +43,7 @@ public class ListClubMembers extends javax.swing.JFrame {
         ClubCode_TextField = new javax.swing.JTextField();
         Search_btn = new javax.swing.JButton();
         Clear_btn = new javax.swing.JButton();
+        dialog_jLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,14 +97,18 @@ public class ListClubMembers extends javax.swing.JFrame {
             }
         });
 
+        dialog_jLabel.setText("Results");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(476, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(dialog_jLabel))
+                .addContainerGap(467, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(9, 9, 9)
@@ -129,7 +134,9 @@ public class ListClubMembers extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel1)
-                .addContainerGap(263, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
+                .addComponent(dialog_jLabel)
+                .addGap(32, 32, 32))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(71, 71, 71)
@@ -197,7 +204,7 @@ public class ListClubMembers extends javax.swing.JFrame {
 
             // qry = "SELECT * FROM Student";
             String qry = "SELECT StudID, SFname, SLname, SPhone, Spass, CName, CDescript, Semester, Year "
-                    + "FROM Student NATURAL JOIN Member NATURAL JOIN Club ";
+                    + "FROM Student NATURAL JOIN Member NATURAL JOIN Club";
 
             String ClubID = ClubCode_TextField.getText();
 
@@ -226,6 +233,9 @@ public class ListClubMembers extends javax.swing.JFrame {
                 dtm.addRow(row);
             }
             jTable1.setModel(dtm);
+            
+            dialog_jLabel.setText("Resulting Rows: "+ jTable1.getRowCount());
+
 
             //}
         } catch (SQLException ex) {
@@ -279,6 +289,7 @@ public class ListClubMembers extends javax.swing.JFrame {
     private javax.swing.JButton Exit_btn;
     private javax.swing.JButton MainMenu_btn;
     private javax.swing.JButton Search_btn;
+    private javax.swing.JLabel dialog_jLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;

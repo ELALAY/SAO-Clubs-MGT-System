@@ -78,6 +78,7 @@ public class ListClubs extends javax.swing.JFrame {
         CPass_jTextField = new javax.swing.JTextField();
         Balance_jTextField = new javax.swing.JTextField();
         Delete_jButton = new javax.swing.JButton();
+        Dialog_jLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -168,6 +169,8 @@ public class ListClubs extends javax.swing.JFrame {
             }
         });
 
+        Dialog_jLabel.setText("Result:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -240,6 +243,10 @@ public class ListClubs extends javax.swing.JFrame {
                             .addComponent(ClearClub_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(Delete_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(44, 44, 44))))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Dialog_jLabel)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,7 +263,9 @@ public class ListClubs extends javax.swing.JFrame {
                     .addComponent(Exit_btn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Dialog_jLabel)
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(ClubID_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -288,7 +297,7 @@ public class ListClubs extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(CPass_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
@@ -369,6 +378,7 @@ public class ListClubs extends javax.swing.JFrame {
                 dtm.addRow(row);
             }
             jTable1.setModel(dtm);
+            Dialog_jLabel.setText("Resulting Rows: " + jTable1.getRowCount());
 
             //}
         } catch (SQLException ex) {
@@ -423,20 +433,20 @@ public class ListClubs extends javax.swing.JFrame {
 
         String qry = "UPDATE Club "
                 + "SET "
-                + "ClubID =          " + ClubID +   ", "
-                + "CName =          '" + CName +    "', "
-                + " CDescript =     '" + CDesc +    "', "
-                + "CcreationDate =  '" + Cdate +    "', "
-                + "AdvID =           " + Adv +      ", "
-                + "Balance =         " + Balance +  ", "
-                + "CPass =          '" + CPass +    "' "
+                + "ClubID =          " + ClubID + ", "
+                + "CName =          '" + CName + "', "
+                + " CDescript =     '" + CDesc + "', "
+                + "CcreationDate =  '" + Cdate + "', "
+                + "AdvID =           " + Adv + ", "
+                + "Balance =         " + Balance + ", "
+                + "CPass =          '" + CPass + "' "
                 + "WHERE ClubID =    " + ClubID;
 
         String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
         String Uid = "root";
         String PW = "marrakec";
         ResultSet rs = null;
-        
+
         try {
             Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
             //System.out.println("connxion dazet");
@@ -445,30 +455,30 @@ public class ListClubs extends javax.swing.JFrame {
 
             // Result Set get the result of the SQL query
             stmt.executeUpdate(qry);
-            
-            JOptionPane.showMessageDialog(this, CName + " Added successfully!"); 
-            
+
+            JOptionPane.showMessageDialog(this, CName + " Added successfully!");
+
         } catch (SQLException ex) {
             Logger.getLogger(ListClubs.class.getName()).log(Level.SEVERE, null, ex);
-           JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
+            JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
         }
 
         // Result Set get the result of the SQL query
         //ResultSet rs = theQuery(qry);
-        
+
     }//GEN-LAST:event_Update_jButtonActionPerformed
 
     private void Delete_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Delete_jButtonActionPerformed
         // TODO add your handling code here:
         String ClubID = ClubID_jTextField.getText();
         String CName = CName_jTextField.getText();
-        
+
         String qry = "DELETE FROM Club WHERE ClubID = " + ClubID;
 
         String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
         String Uid = "root";
         String PW = "marrakec";
-        
+
         try {
             Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
             //System.out.println("connxion dazet");
@@ -477,12 +487,12 @@ public class ListClubs extends javax.swing.JFrame {
 
             // Result Set get the result of the SQL query
             stmt.executeUpdate(qry);
-            
-            JOptionPane.showMessageDialog(this,"The Club "+ CName + " Deleted successfully!"); 
-            
+
+            JOptionPane.showMessageDialog(this, "The Club " + CName + " Deleted successfully!");
+
         } catch (SQLException ex) {
             Logger.getLogger(ListClubs.class.getName()).log(Level.SEVERE, null, ex);
-           JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
+            JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
         }
 
     }//GEN-LAST:event_Delete_jButtonActionPerformed
@@ -538,6 +548,7 @@ public class ListClubs extends javax.swing.JFrame {
     private javax.swing.JTextField ClubCode_TextField;
     private javax.swing.JTextField ClubID_jTextField;
     private javax.swing.JButton Delete_jButton;
+    private javax.swing.JLabel Dialog_jLabel;
     private javax.swing.JButton Exit_btn;
     private javax.swing.JButton MainMenu_btn;
     private javax.swing.JButton Search_btn;
