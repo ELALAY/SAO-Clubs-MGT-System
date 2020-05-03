@@ -21,7 +21,7 @@ public class NewClub extends javax.swing.JFrame {
     public NewClub() {
         initComponents();
         FillAdvCombo();
-        
+
     }
 
     /**
@@ -91,6 +91,11 @@ public class NewClub extends javax.swing.JFrame {
         });
 
         Adv_jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        Adv_jComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Adv_jComboBoxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,10 +126,12 @@ public class NewClub extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
                                     .addComponent(jLabel6))
-                                .addGap(60, 60, 60)
+                                .addGap(54, 54, 54)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(CPass_jPasswordField)
-                                    .addComponent(Adv_jComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(Adv_jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(CPass_jPasswordField))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5))
                     .addGroup(layout.createSequentialGroup()
@@ -179,15 +186,15 @@ public class NewClub extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private void FillAdvCombo(){
+    private void FillAdvCombo() {
         String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
         String Uid = "root";
         String PW = "marrakec";
         ResultSet rs = null;
-        
+
         String qry = "SELECT CONCAT(AdvID, ', ', AdvFname, ' ', AdvLname) "
                 + "as 'Advisor' FROM Advisor";
-        
+
         try {
             Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
             //System.out.println("connxion dazet");
@@ -195,9 +202,9 @@ public class NewClub extends javax.swing.JFrame {
             Statement stmt = (Statement) conn.createStatement();
 
             // Result Set get the result of the SQL query
-            rs= stmt.executeQuery(qry);
-            
-            while(rs.next()) {
+            rs = stmt.executeQuery(qry);
+
+            while (rs.next()) {
                 String Adv = rs.getString("Advisor");
                 Adv_jComboBox.addItem(Adv);
             }
@@ -205,8 +212,8 @@ public class NewClub extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
         }
-    } 
-            
+    }
+
     private ResultSet theQuery(String qry) {
         String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
         String Uid = "root";
@@ -236,19 +243,21 @@ public class NewClub extends javax.swing.JFrame {
         String Cdate = CDate_jTextField.getText();
         //String Adv = Advisor_jTextField.getText();
         String CPass = CPass_jPasswordField.getText();
-        String Adv = Adv_jComboBox.getSelectedItem().toString();
-        System.out.println("advisor: " +Adv);
+
+        String Adv_ID = Adv_jComboBox.getSelectedItem().toString();
+        char Adv = Adv_ID.charAt(0);
+
+        System.out.println("advisor: " + Adv);
 
         String qry = "INSERT INTO Club VALUES "
-                + "(" 
+                + "("
                 + ClubID + ", '" + CName + "', '" + CDesc + "', "
-                + "'" + Cdate + "', " + Adv + ", 4000.0, "  
+                + "'" + Cdate + "', " + Adv + ", 4000.0, "
                 + "'" + CPass + "')";
 
         // Result Set get the result of the SQL query
         ResultSet rs = theQuery(qry);
-        
-        
+
         Clear_Fields();
 
     }//GEN-LAST:event_Save_jButtonActionPerformed
@@ -267,6 +276,10 @@ public class NewClub extends javax.swing.JFrame {
         // TODO add your handling code here:
         Clear_Fields();
     }//GEN-LAST:event_Clear_jButtonActionPerformed
+
+    private void Adv_jComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Adv_jComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Adv_jComboBoxActionPerformed
 
     private void Clear_Fields() {
         ClubID_jTextField.setText("");

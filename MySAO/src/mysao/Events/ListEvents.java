@@ -23,6 +23,8 @@ public class ListEvents extends javax.swing.JFrame {
      */
     public ListEvents() {
         initComponents();
+        FillLocationCombo();
+        FillClubIDCombo();
 
         //Initialize the JTable data model
         ((DefaultTableModel) (jTable1.getModel())).setRowCount(0);
@@ -64,9 +66,7 @@ public class ListEvents extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         EvtBudget_jTextField3 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        ClubID_jTextField4 = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        EvtLocation_jTextField5 = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         EvtStart_jTextField6 = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
@@ -79,6 +79,8 @@ public class ListEvents extends javax.swing.JFrame {
         Clear_jButton = new javax.swing.JButton();
         Delete_jButton = new javax.swing.JButton();
         Dialog_jLabel = new javax.swing.JLabel();
+        Loc_jComboBox = new javax.swing.JComboBox<>();
+        ClubID_jComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -206,6 +208,10 @@ public class ListEvents extends javax.swing.JFrame {
 
         Dialog_jLabel.setText("Results:");
 
+        Loc_jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+
+        ClubID_jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -218,7 +224,7 @@ public class ListEvents extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
@@ -261,22 +267,22 @@ public class ListEvents extends javax.swing.JFrame {
                     .addComponent(jLabel12)
                     .addComponent(jLabel17)
                     .addComponent(jLabel16))
-                .addGap(36, 36, 36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(EventID_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(EvtName_jTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(EvtDesc_jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(EvtBudget_jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(EvtLocation_jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(EvtStart_jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(EvtEnd_jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ClubID_jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EventID_jTextField)
+                    .addComponent(EvtName_jTextField)
+                    .addComponent(EvtDesc_jTextField2)
+                    .addComponent(EvtBudget_jTextField3)
+                    .addComponent(EvtStart_jTextField6)
+                    .addComponent(EvtEnd_jTextField7)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(AdvAPD_jCheckBox)
                             .addComponent(SAOAPD_jCheckBox))
-                        .addGap(86, 86, 86)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(86, 86, 86))
+                    .addComponent(Loc_jComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ClubID_jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Update_jButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Clear_jButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -348,7 +354,7 @@ public class ListEvents extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(EvtLocation_jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Loc_jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
@@ -360,7 +366,7 @@ public class ListEvents extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(ClubID_jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ClubID_jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AdvAPD_jCheckBox)
@@ -374,6 +380,62 @@ public class ListEvents extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void FillLocationCombo() {
+        String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
+        String Uid = "root";
+        String PW = "marrakec";
+        ResultSet rs = null;
+
+        String qry = "SELECT CONCAT(LocID,', ', LocBldg, ' ', LocRoom) "
+                + "as 'Location' FROM Location";
+
+        try {
+            Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
+            //System.out.println("connxion dazet");
+
+            Statement stmt = (Statement) conn.createStatement();
+
+            // Result Set get the result of the SQL query
+            rs = stmt.executeQuery(qry);
+
+            while (rs.next()) {
+                String loc = rs.getString("Location");
+                Loc_jComboBox.addItem(loc);
+            }
+            //return rs;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
+        }
+    }
+
+    private void FillClubIDCombo() {
+        String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
+        String Uid = "root";
+        String PW = "marrakec";
+        ResultSet rs = null;
+
+        String qry = "SELECT CONCAT(ClubID, ', ', CName) "
+                + "as 'Club' FROM Club";
+
+        try {
+            Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
+            //System.out.println("connxion dazet");
+
+            Statement stmt = (Statement) conn.createStatement();
+
+            // Result Set get the result of the SQL query
+            rs = stmt.executeQuery(qry);
+
+            while (rs.next()) {
+                String Club = rs.getString("Club");
+                ClubID_jComboBox.addItem(Club);
+            }
+            //return rs;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
+        }
+    }
 
     private void Exit_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Exit_btnActionPerformed
         // TODO add your handling code here:
@@ -413,6 +475,8 @@ public class ListEvents extends javax.swing.JFrame {
     private void Clear_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Clear_btnActionPerformed
         // TODO add your handling code here:
         EvtCode_TextField.setText("");
+        EvtStart_jTextField6.setText("");
+        EvtEnd_jTextField7.setText("");
     }//GEN-LAST:event_Clear_btnActionPerformed
 
     private void Search_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search_btnActionPerformed
@@ -547,35 +611,47 @@ public class ListEvents extends javax.swing.JFrame {
             String startDate = StartDate_jTextField.getText();
             String endDate = EndDate_jTextField1.getText();
 
-            String qry = "SELECT * FROM Event"
-                    + "WHERE EvtStart BETWEEN '" + startDate + "' AND '" + endDate + "'";
+            String qry = "SELECT * FROM Event ";
+
+            if (!startDate.isEmpty() && endDate.isEmpty()) {
+                qry += "WHERE EvtStart > '" + startDate + "'";
+            } else if (!startDate.isEmpty() && !endDate.isEmpty()) {
+                qry += "WHERE EvtStart BETWEEN '" + startDate + "' AND '" + endDate + "'";
+            } else if (startDate.isEmpty() && endDate.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Empty Date Fields!");
+            }
+//                    + "WHERE EvtStart BETWEEN '" + startDate + "' AND '" + endDate + "'";
+
             /*tring qry = "SELECT e.EvtID, e.EvtName, e.EvtDescript, CONCAT(l.LocBldg, ' ', l.LocRoom) as 'Location', e.EvtStart, e.EvtEnd, c.CName, e.AdvApproval, e.SAOApproval "
                     + "FROM Event as e JOIN Club as c ON e.ClubID = c.ClubID "
                     + "JOIN Location as l ON l.LocID = e.EvtLocation "
                     + "WHERE EvtStart BETWEEN '" + startDate + "' AND '" + endDate + "'";
              */
-
             // Result Set get the result of the SQL query
             ResultSet rs = theQuery(qry);
 
-            ResultSetMetaData rsmd = rs.getMetaData();
-            int c = rsmd.getColumnCount();
+            if (rs != null) {
+                ResultSetMetaData rsmd = rs.getMetaData();
+                int c = rsmd.getColumnCount();
 
-            DefaultTableModel dtm = new DefaultTableModel();
-            for (int i = 1; i <= c; ++i) {
-                dtm.addColumn(rsmd.getColumnName(i));
-            }
-
-            Object[] row;
-            while (rs.next()) {
-                row = new Object[c];
-                for (int i = 0; i < c; ++i) {
-                    row[i] = rs.getString(i + 1);
+                DefaultTableModel dtm = new DefaultTableModel();
+                for (int i = 1; i <= c; ++i) {
+                    dtm.addColumn(rsmd.getColumnName(i));
                 }
-                dtm.addRow(row);
+
+                Object[] row;
+                while (rs.next()) {
+                    row = new Object[c];
+                    for (int i = 0; i < c; ++i) {
+                        row[i] = rs.getString(i + 1);
+                    }
+                    dtm.addRow(row);
+                }
+                jTable1.setModel(dtm);
+                Dialog_jLabel.setText("Resulting Rows: " + jTable1.getRowCount());
+            } else {
+                JOptionPane.showMessageDialog(this, "No Results found!");
             }
-            jTable1.setModel(dtm);
-            Dialog_jLabel.setText("Resulting Rows: " + jTable1.getRowCount());
 
             //}
         } catch (SQLException ex) {
@@ -588,10 +664,14 @@ public class ListEvents extends javax.swing.JFrame {
         EvtName_jTextField.setText("");
         EvtDesc_jTextField2.setText("");
         EvtBudget_jTextField3.setText("");
-        EvtLocation_jTextField5.setText("");
+
+        Loc_jComboBox.setSelectedIndex(0);
+
         EvtStart_jTextField6.setText("");
         EvtEnd_jTextField7.setText("");
-        ClubID_jTextField4.setText("");
+
+        ClubID_jComboBox.setSelectedIndex(0);
+
         AdvAPD_jCheckBox.setSelected(false);
         SAOAPD_jCheckBox.setSelected(false);
     }
@@ -612,10 +692,60 @@ public class ListEvents extends javax.swing.JFrame {
         EvtName_jTextField.setText(model.getValueAt(rowIndex, 1).toString());
         EvtDesc_jTextField2.setText(model.getValueAt(rowIndex, 2).toString());
         EvtBudget_jTextField3.setText(model.getValueAt(rowIndex, 3).toString());
-        EvtLocation_jTextField5.setText(model.getValueAt(rowIndex, 4).toString());
+        //EvtLocation_jTextField5.setText(model.getValueAt(rowIndex, 4).toString());
+
+        //--------Getting the Location ID String---------------------
+        String Loc_ID = model.getValueAt(rowIndex, 4).toString();
+        String EvtLoc = "";
+        for (int i = 0; i < Loc_ID.length(); ++i) {
+            if (Loc_ID.charAt(i) != ',') {
+                EvtLoc += Loc_ID.charAt(i);
+            } else {
+                break;
+            }
+        }
+        //----Setting the combobox to the String Location ID ----
+        for (int i = 1; i < Loc_jComboBox.getItemCount(); ++i) {
+
+            String temp_comp = Loc_jComboBox.getItemAt(i);
+            /*System.out.println(temp_comp);
+            System.out.println(EvtLoc + " is the LocID, and lenth = " + (EvtLoc.length() - 1));
+             */
+            int len = EvtLoc.length();
+            String temp_comp_substr = null;
+
+            if (temp_comp.length() >= len) {
+                temp_comp_substr = temp_comp.substring(0, len);
+
+                /*
+            System.out.println(EvtLoc);
+            System.out.println(temp_comp_substr);
+
+            System.out.println("---next item----");
+                 */
+                if (EvtLoc.equals(temp_comp_substr)) {
+                    Loc_jComboBox.setSelectedIndex(i);
+                    break;
+                }
+            }
+        }
+
         EvtStart_jTextField6.setText(model.getValueAt(rowIndex, 5).toString());
         EvtEnd_jTextField7.setText(model.getValueAt(rowIndex, 6).toString());
-        ClubID_jTextField4.setText(model.getValueAt(rowIndex, 7).toString());
+        //ClubID_jTextField4.setText(model.getValueAt(rowIndex, 7).toString());
+
+        //-------Getting the club ID--------------------
+        String Club_ID_s = model.getValueAt(rowIndex, 7).toString();
+        String ClubID = "";
+        for (int i = 0; i < Club_ID_s.length(); ++i) {
+            if (Club_ID_s.charAt(i) != ',') {
+                ClubID += Club_ID_s.charAt(i);
+            } else {
+                break;
+            }
+        }
+
+        ClubID_jComboBox.setSelectedIndex(Integer.parseInt(ClubID) + 1);
 
         int AdvApd = Integer.parseInt(model.getValueAt(rowIndex, 8).toString());
         if (AdvApd == 1) {
@@ -638,22 +768,44 @@ public class ListEvents extends javax.swing.JFrame {
         String EvtName = EvtName_jTextField.getText();
         String EvtDesc = EvtDesc_jTextField2.getText();
         String EvtBudget = EvtBudget_jTextField3.getText();
-        String EvtLoc = EvtLocation_jTextField5.getText();
+        //String EvtLoc = EvtLocation_jTextField5.getText();
         String EvtStart = EvtStart_jTextField6.getText();
         String EvtEnd = EvtEnd_jTextField7.getText();
-        String ClubID = ClubID_jTextField4.getText();
+        //String ClubID = ClubID_jTextField4.getText();
+
+        String Loc_ID = Loc_jComboBox.getSelectedItem().toString();
+        String EvtLoc = "";
+        for (int i = 0; i < Loc_ID.length(); ++i) {
+            if (Loc_ID.charAt(i) != ',') {
+                EvtLoc += Loc_ID.charAt(i);
+            } else {
+                break;
+            }
+        }
+        System.out.println(EvtLoc);
+
+        String Club_ID_s = ClubID_jComboBox.getSelectedItem().toString();
+        String ClubID = "";
+        for (int i = 0; i < Club_ID_s.length(); ++i) {
+            if (Club_ID_s.charAt(i) != ',') {
+                ClubID += Club_ID_s.charAt(i);
+            } else {
+                break;
+            }
+        }
+        System.out.println(ClubID);
 
         int AdvApd = 0;
         if (AdvAPD_jCheckBox.isSelected()) {
             AdvApd = 1;
         }
-        System.out.println("AdvApd = "+ AdvApd );
+        System.out.println("AdvApd = " + AdvApd);
 
         int SaoApd = 0;
         if (SAOAPD_jCheckBox.isSelected()) {
             SaoApd = 1;
         }
-        System.out.println("AdvApd = "+ SaoApd );
+        System.out.println("AdvApd = " + SaoApd);
 
         String qry = "UPDATE Event "
                 + "SET "
@@ -667,7 +819,7 @@ public class ListEvents extends javax.swing.JFrame {
                 + "ClubID       = " + ClubID + ", "
                 + "AdvApproval  = " + AdvApd + ", "
                 + "SAOApproval  = " + SaoApd
-                + " WHERE EvtID  = " + EvtID;
+                + " WHERE EvtID = " + EvtID;
 
         String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
         String Uid = "root";
@@ -695,8 +847,8 @@ public class ListEvents extends javax.swing.JFrame {
     private void Delete_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Delete_jButtonActionPerformed
         // TODO add your handling code here:
         String EvtID = EventID_jTextField.getText();
-        
-        String qry = "DELETE FROM Event WHERE EvtID = " +EvtID;
+
+        String qry = "DELETE FROM Event WHERE EvtID = " + EvtID;
 
         String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
         String Uid = "root";
@@ -762,7 +914,7 @@ public class ListEvents extends javax.swing.JFrame {
     private javax.swing.JButton AllEvts_jButton;
     private javax.swing.JButton Clear_btn;
     private javax.swing.JButton Clear_jButton;
-    private javax.swing.JTextField ClubID_jTextField4;
+    private javax.swing.JComboBox<String> ClubID_jComboBox;
     private javax.swing.JButton Delete_jButton;
     private javax.swing.JLabel Dialog_jLabel;
     private javax.swing.JTextField EndDate_jTextField1;
@@ -771,10 +923,10 @@ public class ListEvents extends javax.swing.JFrame {
     private javax.swing.JTextField EvtCode_TextField;
     private javax.swing.JTextField EvtDesc_jTextField2;
     private javax.swing.JTextField EvtEnd_jTextField7;
-    private javax.swing.JTextField EvtLocation_jTextField5;
     private javax.swing.JTextField EvtName_jTextField;
     private javax.swing.JTextField EvtStart_jTextField6;
     private javax.swing.JButton Exit_btn;
+    private javax.swing.JComboBox<String> Loc_jComboBox;
     private javax.swing.JButton MainMenu_btn;
     private javax.swing.JCheckBox SAOAPD_jCheckBox;
     private javax.swing.JButton SearchDate_jButton;

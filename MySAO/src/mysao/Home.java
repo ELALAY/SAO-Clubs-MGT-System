@@ -10,6 +10,7 @@ import mysao.Clubs.ListClubs;
 import mysao.Clubs.Search_A_Club;
 import mysao.Events.ListEvents;
 import mysao.Events.NewEvent;
+import mysao.Students.ListClubMembers;
 
 /**
  *
@@ -40,6 +41,7 @@ public class Home extends javax.swing.JFrame {
         Exit_jButton = new javax.swing.JButton();
         LogOut_jButton = new javax.swing.JButton();
         CreateEvetn_jButton = new javax.swing.JButton();
+        ListStud_jButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,6 +90,13 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        ListStud_jButton.setText("List Members");
+        ListStud_jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListStud_jButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,22 +107,25 @@ public class Home extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ListEvent_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(SearchClubs_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(CreateClub_jButton1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(CreateEvetn_jButton))))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(LogOut_jButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Exit_jButton)))
+                        .addComponent(Exit_jButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ListStud_jButton)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(ListEvent_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(SearchClubs_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(CreateClub_jButton1))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(CreateEvetn_jButton)))))))
                 .addContainerGap(156, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -129,7 +141,9 @@ public class Home extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ListEvent_jButton)
                     .addComponent(CreateEvetn_jButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ListStud_jButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Exit_jButton)
                     .addComponent(LogOut_jButton))
@@ -194,6 +208,16 @@ public class Home extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_CreateEvetn_jButtonActionPerformed
 
+    private void ListStud_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListStud_jButtonActionPerformed
+        // TODO add your handling code here:
+        ListClubMembers frm = new ListClubMembers();
+        frm.setLocation(getLocation());
+        frm.setSize(getSize());
+        setVisible(false);
+        frm.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_ListStud_jButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -234,6 +258,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton CreateEvetn_jButton;
     private javax.swing.JButton Exit_jButton;
     private javax.swing.JButton ListEvent_jButton;
+    private javax.swing.JButton ListStud_jButton;
     private javax.swing.JButton LogOut_jButton;
     private javax.swing.JButton SearchClubs_jButton;
     private javax.swing.JLabel jLabel1;
