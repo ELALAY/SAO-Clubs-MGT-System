@@ -273,7 +273,6 @@ public class NewClub extends javax.swing.JFrame {
         CName_jTextField.setText("");
         CDescript_jTextField.setText("");
         CDate_jTextField.setText("");
-        Advisor_jTextField.setText("");
         CPass_jPasswordField.setText("");
         Adv_jComboBox.setSelectedIndex(0);
     }
