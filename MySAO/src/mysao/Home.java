@@ -9,6 +9,7 @@ import mysao.Clubs.NewClub;
 import mysao.Clubs.ListClubs;
 import mysao.Clubs.Search_A_Club;
 import mysao.Events.ListEvents;
+import mysao.Events.NewEvent;
 
 /**
  *
@@ -38,6 +39,7 @@ public class Home extends javax.swing.JFrame {
         ListEvent_jButton = new javax.swing.JButton();
         Exit_jButton = new javax.swing.JButton();
         LogOut_jButton = new javax.swing.JButton();
+        CreateEvetn_jButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,6 +81,13 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        CreateEvetn_jButton.setText("Create Event");
+        CreateEvetn_jButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CreateEvetn_jButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,14 +102,19 @@ public class Home extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(ListEvent_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(SearchClubs_jButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(12, 12, 12)
-                        .addComponent(CreateClub_jButton1))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(CreateClub_jButton1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(CreateEvetn_jButton))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(LogOut_jButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Exit_jButton)))
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,7 +126,9 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(SearchClubs_jButton)
                     .addComponent(CreateClub_jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ListEvent_jButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ListEvent_jButton)
+                    .addComponent(CreateEvetn_jButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Exit_jButton)
@@ -168,6 +184,16 @@ public class Home extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_LogOut_jButtonActionPerformed
 
+    private void CreateEvetn_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateEvetn_jButtonActionPerformed
+        // TODO add your handling code here:
+        NewEvent frm = new NewEvent();
+        frm.setLocation(getLocation());
+        frm.setSize(getSize());
+        setVisible(false);
+        frm.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_CreateEvetn_jButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -205,6 +231,7 @@ public class Home extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CreateClub_jButton1;
+    private javax.swing.JButton CreateEvetn_jButton;
     private javax.swing.JButton Exit_jButton;
     private javax.swing.JButton ListEvent_jButton;
     private javax.swing.JButton LogOut_jButton;
