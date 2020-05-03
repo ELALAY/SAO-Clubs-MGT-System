@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title>Clubs</title>
-  <link href="css/index.css" rel="stylesheet" type="text/css">
+<meta charset="utf-8">
+        <!-- importer le fichier de style -->
+        <link href="css/index.css" rel="stylesheet" type="text/css">
 <style>
 .dropbtn {
   background-color: #4CAF50;
@@ -88,6 +89,7 @@
     <a href="update_member.php">Update a member</a>
     </div>
   </div> 
+
 <div class="dropdown">
     <button class="dropbtn">Board 
       <i class="fa fa-caret-down"></i>
@@ -100,13 +102,11 @@
   </div>  
 
 </div>
- 
 <img src = "http://www.togenit.com/front_media/user_images/500x500/1420736920.3034.jpg" alt = "SAO" class="center" width = 100px height = 100px>
-<h2>Clubs</h2>
-<table style="border: solid 1px white;">
-<tr><th>Club ID</th><th>Club Name</th><th>Advisor Name</tr>
+ <table style="border: solid 1px white;">
+<tr><th>Option</th><th> Student ID</th><th>Club ID</th><th>Semester</th><th> Year</th><th>Active</tr>
 
-<span style="color:white;"><?php
+  <?php
 class TableRows extends RecursiveIteratorIterator {
   function __construct($it) {
     parent::__construct($it, self::LEAVES_ONLY);
@@ -115,20 +115,45 @@ class TableRows extends RecursiveIteratorIterator {
     return "<td style='border:1px solid white;'>" . parent::current() . "</td>";
   }
   function beginChildren() {
-    echo "<tr>";
+     echo "<tr><td style='border:1px solid black;'>
+          <button name='pcode' type='submit' formaction='view_member.php' value='" . parent::current() .
+             "' formmethod='POST' >View</button>
+          <button name='pcode' type='submit' formaction='upd_member.php' value='" . parent::current() .
+             "' formmethod='POST'>Upd</button>
+          <button name='pcode' type='submit' formaction='del_member.php'  value='" . parent::current() .
+             "' formmethod='POST'>Del</button></td>
+           
+             \n";
+
+
   }
   function endChildren() {
     echo "</tr>" . "\n";
   }
 }
 
+
 // Connect to database server
 include_once 'includes/db_connect.php';
 
+//include_once 'loginclub.php';
+
+
+//$user=$_POST["usernames"];
+//$username = mysqli_real_escape_string($db,htmlspecialchars($_POST['username'])); 
+
+
+//echo "Bonjour $username ";
+
+//$user=$_REQUEST['user'];
+
+$user= $_REQUEST['user'];
+
+echo $user;
+
 try {
   $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $sth = $dbh->prepare("SELECT ClubID, Cdescript , AdvLName
-                        FROM CLub NATURAL JOIN Advisor ORDER BY ClubID");
+  $sth = $dbh->prepare("call view_club_members('".$user."') ");
   $sth->execute();
 
   // set the resulting array to associative

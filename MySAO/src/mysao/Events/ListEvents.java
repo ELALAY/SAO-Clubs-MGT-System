@@ -648,12 +648,13 @@ public class ListEvents extends javax.swing.JFrame {
                 + "EvtEnd       = '"  + EvtEnd    + "', "
                 + "ClubID       = "   + ClubID    + ", "
                 + "AdvApproval  = "   + AdvApd    + ", "
-                + "SAOApproval  = "   + SaoApd;
+                + "SAOApproval  = "   + SaoApd    
+                + "WHERE EvtID  = "   + EvtID     ;
 
         String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
         String Uid = "root";
         String PW = "marrakec";
-        ResultSet rs = null;
+        //ResultSet rs = null;
 
         try {
             Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
@@ -664,7 +665,7 @@ public class ListEvents extends javax.swing.JFrame {
             // Result Set get the result of the SQL query
             stmt.executeUpdate(qry);
 
-            JOptionPane.showMessageDialog(this, "Added successfully!");
+            JOptionPane.showMessageDialog(this, "Updated successfully!");
 
         } catch (SQLException ex) {
             Logger.getLogger(ListEvents.class.getName()).log(Level.SEVERE, null, ex);

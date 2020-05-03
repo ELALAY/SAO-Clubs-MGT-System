@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title>Clubs</title>
+  <title>Delete Board Member</title>
+  <script type="text/JavaScript" src="js/forms.js"></script>
   <link href="css/index.css" rel="stylesheet" type="text/css">
 <style>
 .dropbtn {
@@ -40,8 +41,8 @@
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
 </style>
 
-    </head>
-    <body>
+</head>
+<body>
 
         <div class="navbar">
 
@@ -100,49 +101,17 @@
   </div>  
 
 </div>
- 
-<img src = "http://www.togenit.com/front_media/user_images/500x500/1420736920.3034.jpg" alt = "SAO" class="center" width = 100px height = 100px>
-<h2>Clubs</h2>
-<table style="border: solid 1px white;">
-<tr><th>Club ID</th><th>Club Name</th><th>Advisor Name</tr>
+<?php include_once 'includes/get_board_to_delete.inc.php';?>
 
-<span style="color:white;"><?php
-class TableRows extends RecursiveIteratorIterator {
-  function __construct($it) {
-    parent::__construct($it, self::LEAVES_ONLY);
-  }
-  function current() {
-    return "<td style='border:1px solid white;'>" . parent::current() . "</td>";
-  }
-  function beginChildren() {
-    echo "<tr>";
-  }
-  function endChildren() {
-    echo "</tr>" . "\n";
-  }
-}
-
-// Connect to database server
-include_once 'includes/db_connect.php';
-
-try {
-  $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  $sth = $dbh->prepare("SELECT ClubID, Cdescript , AdvLName
-                        FROM CLub NATURAL JOIN Advisor ORDER BY ClubID");
-  $sth->execute();
-
-  // set the resulting array to associative
-  $result = $sth->setFetchMode(PDO::FETCH_ASSOC);
-  foreach(new TableRows(new RecursiveArrayIterator($sth->fetchAll())) as $k=>$v) {
-     echo $v;
-  }
-}
-catch(PDOException $e) {
-  echo "Error: " . $e->getMessage();
-}
-$dbh = null;
-?></span>
-
-</table>
+  <!-- Delete product form to be output if the POST variables are not
+  set or if the deletion script caused an error. -->
+  <h2>Enter the board member to delete</h2>
+  <?php echo $error_msg;?>
+  <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" name="Delete_board_form">
+    Club ID: <input type="text" name="clubid" value="" />
+    Student ID: <input type="text" name="studid" value="" />
+    <input type="submit" value="Submit" onclick="return checkform2(this.form, this.form.clubid, this.form.studid);" />
+    <input type="reset" />
+  </form>
 </body>
 </html>

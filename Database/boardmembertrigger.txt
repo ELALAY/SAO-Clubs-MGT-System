@@ -1,0 +1,27 @@
+DELIMITER $$
+
+CREATE TRIGGER boardmembertrigger BEFORE INSERT ON Board
+FOR EACH ROW
+Begin
+-- Check if the added board member role is already in the table
+  IF (SELECT count(*)
+      FROM Board
+      WHERE ClubID = NEW.ClubID AND ranking = NEW.ranking) = 1
+  THEN
+    -- Board member in that position already exists, reject operation
+    SET @msg = CONCAT('Sorry, board member for that position already exists; delete him first!');
+    SIGNAL sqlstate '45001' SET MESSAGE_TEXT = @msg;
+End if;
+End; $$
+
+DELIMITER ;
+
+-- 1) The following insert should be accepted
+INSERT INTO Board VALUES (34596, 4, 'SP', 2020, 1);
+
+SELECT * FROM board where ClubId = 4;
+
+-- 2) The following insert should not be accepted
+INSERT INTO Board VALUES (34596, 2, 'SP', 2020, 2);
+
+SELECT * FROM board where ClubId = 2;

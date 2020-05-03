@@ -1,0 +1,39 @@
+ 
+Procedure 1
+
+DELIMITER $
+ CREATE PROCEDURE view_club_members(cid int)
+  BEGIN
+  SELECT * FROM Member WHERE ClubID = cid;
+  END $
+DELIMITER ;
+
+
+Procedure 2
+
+DELIMITER $
+CREATE PROCEDURE add_member(studid varchar(15), clubid varchar(15), sem char(3), year varchar(7))
+BEGIN
+INSERT INTO Member
+VALUES (studid,clubid,sem,year);
+END$
+DELIMITER ;
+
+Procedure 3
+
+DELIMITER $
+ CREATE PROCEDURE view_board(cid int)
+  BEGIN
+  SELECT * FROM Board WHERE ClubID = cid ORDER BY ranking;
+  END $
+DELIMITER ;
+
+Procedure 4
+
+DELIMITER $
+CREATE PROCEDURE add_board(studid varchar(15), clubid varchar(15), sem char(3), year varchar(7), rank int)
+BEGIN
+INSERT INTO Board
+VALUES (studid,clubid,sem,year,rank);
+END$
+DELIMITER ;

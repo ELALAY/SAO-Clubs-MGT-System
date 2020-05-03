@@ -28,11 +28,14 @@ list-style-type: none;
 
 .active {
   background-color: #4CAF50;
+
 }
 
 
+
+
 body{
-background-image: url("https://image.freepik.com/free-vector/green-light-dark-grey-grey-metallic-curve-overlap-background_33869-1233.jpg");
+background-image: url("https://ak4.picdn.net/shutterstock/videos/9537194/thumb/1.jpg");
 background-repeat: no-repeat;
 background-size: cover;
 }

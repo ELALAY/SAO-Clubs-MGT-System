@@ -423,14 +423,14 @@ public class ListClubs extends javax.swing.JFrame {
 
         String qry = "UPDATE Club "
                 + "SET "
-                + "ClubID = " + ClubID + ", "
-                + "CName = '" + CName + "', "
-                + " CDescript = '" + CDesc + "', "
-                + "CcreationDate = '" + Cdate + "', "
-                + "AdvID = " + Adv + ", "
-                + "Balance = 4000.0, "
-                + "CPass = '" + CPass + "' "
-                + "WHERE ClubID = " + ClubID;
+                + "ClubID =          " + ClubID +   ", "
+                + "CName =          '" + CName +    "', "
+                + " CDescript =     '" + CDesc +    "', "
+                + "CcreationDate =  '" + Cdate +    "', "
+                + "AdvID =           " + Adv +      ", "
+                + "Balance =         " + Balance +  ", "
+                + "CPass =          '" + CPass +    "' "
+                + "WHERE ClubID =    " + ClubID;
 
         String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
         String Uid = "root";

@@ -1,5 +1,7 @@
+
+
 <?php
-session_start();
+
 if(isset($_POST['username']) && isset($_POST['password']))
 {
     // connexion à la base de données
@@ -28,7 +30,7 @@ if(isset($_POST['username']) && isset($_POST['password']))
         if($count==1) // nom d'utilisateur et mot de passe correctes
         {
            $_SESSION['username'] = $res;
-           header('Location: welcomeclub.php');
+           header('Location: welcomeclub.php?');
         }
         else
         {
@@ -46,3 +48,4 @@ else
 }
 mysqli_close($db); // fermer la connexion
 ?>
+

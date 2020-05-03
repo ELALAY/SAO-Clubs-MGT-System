@@ -1,0 +1,27 @@
+DELIMITER $$
+
+CREATE TRIGGER meetingtimetrigger BEFORE INSERT ON Meeting
+FOR EACH ROW
+Begin
+-- Check if the added meeting will be in time conflict with another meeting that is at the same location
+  IF (SELECT count(*)
+      FROM meeting
+      WHERE MLocation = NEW.MLocation AND MDateTime = NEW.MDateTime) = 1
+  THEN
+    -- During that time, the location desired is already used
+    SET @msg = CONCAT('Sorry, but location', NEW.MLocation, ' is already used for that timeslot on the desired date!');
+    SIGNAL sqlstate '45001' SET MESSAGE_TEXT = @msg;
+End if;
+End; $$
+
+DELIMITER ;
+
+-- 1) The following insert should be accepted
+INSERT INTO Meeting VALUES (4, 5, '2020-02-11 13:00:00.000', 'SMR1', 'Discuss a project idea to improve AUI's IT problems.');
+
+SELECT * FROM meeting;
+
+-- 2) The following insert should not be accepted
+INSERT INTO Meeting VALUES (5, 3, '2020-02-9 15:00:00.000', 'CAM', 'Discuss the coming FUN RUN event.');
+
+SELECT * FROM meeting;
