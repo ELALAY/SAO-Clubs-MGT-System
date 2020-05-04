@@ -54,15 +54,43 @@
   $_SESSION["username"]=$_POST["username"];
 
     $user = $_SESSION["username"];
-            echo $user;
+
+
+$servername = "localhost";
+$username = "aouridy";
+$password = "parisberlinY7";
+$dbname = "saodb";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT Cdescript FROM Club WHERE ClubID = '".$user."'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "Welcome: "  . $row["Cdescript"]. "<br>";
+    }
+} else {
+    echo "0 results";
+}
+$conn->close();
+
+
+
             ?>
 
 
-        <form  method="post">
+     <!--   <form  method="post">
 <input type="hidden" name="username" placeholder="Club Id" id="user"  value = "<?php echo $_SESSION["username"]?>">
 <button name='pcode' type='submit'  value="<?php echo $_POST["username"]?>" formmethod='POST'  onclick="return submitForm(this.form);">CHECK </button> 
 </form> 
-
+-->
 
 
 

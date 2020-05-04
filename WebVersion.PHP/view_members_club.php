@@ -104,7 +104,7 @@
 </div>
 <img src = "http://www.togenit.com/front_media/user_images/500x500/1420736920.3034.jpg" alt = "SAO" class="center" width = 100px height = 100px>
  <table style="border: solid 1px white;">
-<tr><th>Option</th><th> Student ID</th><th>Club ID</th><th>Semester</th><th> Year</th><th>Active</tr>
+<tr><th>Option</th><th> Student ID</th><th> Student Name</th><th>Semester</th><th> Year</tr>
 
   <?php
 class TableRows extends RecursiveIteratorIterator {

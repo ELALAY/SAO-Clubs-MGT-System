@@ -24,9 +24,9 @@
 				</label>
 				<input type="password" name="password" placeholder="Password" id="password" required>
 				<input type="submit" id="submit" value="Login"  onclick="return submitForm(this.form);">
-<!--
-				<?php
-				//session_start();
+
+			<!--	<?php
+				session_start();
 				//$_SESSION["username"]=$_POST["username"];
 
                 			if (isset($_GET['erreur'])){

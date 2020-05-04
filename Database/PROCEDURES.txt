@@ -4,7 +4,7 @@ Procedure 1
 DELIMITER $
  CREATE PROCEDURE view_club_members(cid int)
   BEGIN
-  SELECT * FROM Member WHERE ClubID = cid;
+  SELECT StudID, concat(SFName," ",SLname) AS 'Student Name', Semester, Year FROM Member NATURAL JOIN Student WHERE ClubID = cid;
   END $
 DELIMITER ;
 

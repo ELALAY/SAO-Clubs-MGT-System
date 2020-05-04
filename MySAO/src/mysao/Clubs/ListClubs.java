@@ -438,8 +438,9 @@ public class ListClubs extends javax.swing.JFrame {
         CDate_jTextField.setText(model.getValueAt(rowIndex, 3).toString());
         // Advisor_jTextField.setText(model.getValueAt(rowIndex, 4).toString());
 
-        char adv_index = model.getValueAt(rowIndex, 4).toString().charAt(0);
-        Adv_jComboBox.setSelectedIndex(adv_index - '1');
+        int adv_index = 0; 
+                adv_index = Integer.parseInt( model.getValueAt(rowIndex, 4).toString() );
+        Adv_jComboBox.setSelectedIndex(adv_index);
         
         Balance_jTextField.setText(model.getValueAt(rowIndex, 5).toString());
         CPass_jTextField.setText(model.getValueAt(rowIndex, 6).toString());

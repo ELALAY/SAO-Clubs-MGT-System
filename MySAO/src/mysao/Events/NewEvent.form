@@ -40,16 +40,14 @@
                           <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel18" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="EventID_jTextField" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
-                          <Component id="EvtName_jTextField" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
-                          <Component id="EvtDesc_jTextField2" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
-                          <Component id="EvtBudget_jTextField3" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
-                          <Component id="EvtLocation_jTextField5" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
-                          <Component id="EvtStart_jTextField6" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
-                          <Component id="EvtEnd_jTextField7" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
-                          <Component id="ClubID_jTextField4" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
+                          <Component id="EventID_jTextField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="EvtName_jTextField" alignment="0" max="32767" attributes="0"/>
+                          <Component id="EvtDesc_jTextField2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="EvtBudget_jTextField3" alignment="0" max="32767" attributes="0"/>
+                          <Component id="EvtStart_jTextField6" alignment="0" max="32767" attributes="0"/>
+                          <Component id="EvtEnd_jTextField7" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="AdvAPD_jCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -57,6 +55,8 @@
                               </Group>
                               <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="Loc_jComboBox" alignment="0" max="32767" attributes="0"/>
+                          <Component id="Club_jComboBox" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -66,7 +66,7 @@
                       <Component id="Home_jButton" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="58" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -98,7 +98,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="EvtLocation_jTextField5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Loc_jComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -113,7 +113,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="ClubID_jTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Club_jComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -130,7 +130,7 @@
                   <Component id="Create_jButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Home_jButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="58" max="32767" attributes="0"/>
+              <EmptySpace pref="48" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -140,8 +140,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Event Location"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="EvtLocation_jTextField5">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel14">
       <Properties>
@@ -210,8 +208,6 @@
         <Property name="text" type="java.lang.String" value="Club ID"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="ClubID_jTextField4">
-    </Component>
     <Component class="javax.swing.JButton" name="Create_jButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Create"/>
@@ -233,6 +229,30 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Create Event"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="Loc_jComboBox">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="1">
+            <StringItem index="0" value=" "/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="Club_jComboBox">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="1">
+            <StringItem index="0" value=" "/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

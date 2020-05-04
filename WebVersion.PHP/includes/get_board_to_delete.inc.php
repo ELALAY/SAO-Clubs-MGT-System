@@ -22,14 +22,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     // Check whether the submitted product already exists
     $sql = "SELECT *
             FROM Board
-            WHERE StudID = :studid AND ClubID = :clubid";
+            WHERE StudID = '".$studid."' AND ClubID = '".$clubid."'";
 
     $sth = $dbh->prepare($sql);
     $sth->bindParam(':clubid', $clubid);
     $sth->bindParam(':studid', $studid);
-    $sth->bindParam(':sem', $sem);
-    $sth->bindParam(':year', $year);
-    $sth->bindParam(':ranking', $ranking);
+    
     // Execute the prepared query.
     $res = $sth->execute();
     $record = $sth->fetchAll();
@@ -44,14 +42,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 	
 	// Delete the product from the Product table
       	$sql = "DELETE FROM Board
-                WHERE StudID = :studid AND ClubID = :clubid";
+                WHERE StudID = '".$studid."' AND ClubID = '".$clubid."'";
 	$sth = $dbh->prepare($sql);
     	$sth->bindParam(':pcode', $pcode);
 	$res = $sth->execute();
 	$error_msg = "<p> Board member deleted successfully.</p>";
+  echo $error_msg;
 
 	// Go to the page with product catalog
-      	header("Location:view_members_club.php?user=$clubid");
+      //	header("Location:view_members_club.php");
 	exit();
     }
   }

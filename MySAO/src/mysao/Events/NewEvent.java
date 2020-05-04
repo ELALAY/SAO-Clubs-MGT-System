@@ -20,6 +20,9 @@ public class NewEvent extends javax.swing.JFrame {
      */
     public NewEvent() {
         initComponents();
+        
+        FillClubIDCombo();
+        FillLocationCombo();
     }
 
     /**
@@ -32,7 +35,6 @@ public class NewEvent extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel13 = new javax.swing.JLabel();
-        EvtLocation_jTextField5 = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         EventID_jTextField = new javax.swing.JTextField();
@@ -50,10 +52,11 @@ public class NewEvent extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         EvtBudget_jTextField3 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        ClubID_jTextField4 = new javax.swing.JTextField();
         Create_jButton = new javax.swing.JButton();
         Home_jButton = new javax.swing.JButton();
         jLabel18 = new javax.swing.JLabel();
+        Loc_jComboBox = new javax.swing.JComboBox<>();
+        Club_jComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,6 +101,10 @@ public class NewEvent extends javax.swing.JFrame {
 
         jLabel18.setText("Create Event");
 
+        Loc_jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+
+        Club_jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -118,27 +125,27 @@ public class NewEvent extends javax.swing.JFrame {
                             .addComponent(jLabel17)
                             .addComponent(jLabel16)
                             .addComponent(jLabel18))
-                        .addGap(36, 36, 36)
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(EventID_jTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(EvtName_jTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(EvtDesc_jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(EvtBudget_jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(EvtLocation_jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(EvtStart_jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(EvtEnd_jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ClubID_jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(EventID_jTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(EvtName_jTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(EvtDesc_jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(EvtBudget_jTextField3, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(EvtStart_jTextField6, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(EvtEnd_jTextField7, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(AdvAPD_jCheckBox)
                                     .addComponent(SAOAPD_jCheckBox))
-                                .addGap(86, 86, 86))))
+                                .addGap(86, 86, 86))
+                            .addComponent(Loc_jComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Club_jComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(44, 44, 44)
                         .addComponent(Create_jButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Home_jButton)))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,7 +171,7 @@ public class NewEvent extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(EvtLocation_jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Loc_jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
@@ -176,7 +183,7 @@ public class NewEvent extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(ClubID_jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Club_jComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AdvAPD_jCheckBox)
@@ -189,12 +196,68 @@ public class NewEvent extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Create_jButton)
                     .addComponent(Home_jButton))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void FillLocationCombo() {
+        String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
+        String Uid = "root";
+        String PW = "marrakec";
+        ResultSet rs = null;
+
+        String qry = "SELECT CONCAT(LocID,', ', LocBldg, ' ', LocRoom) "
+                + "as 'Location' FROM Location";
+
+        try {
+            Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
+            //System.out.println("connxion dazet");
+
+            Statement stmt = (Statement) conn.createStatement();
+
+            // Result Set get the result of the SQL query
+            rs = stmt.executeQuery(qry);
+
+            while (rs.next()) {
+                String loc = rs.getString("Location");
+                Loc_jComboBox.addItem(loc);
+            }
+            //return rs;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
+        }
+    }
+
+    private void FillClubIDCombo() {
+        String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
+        String Uid = "root";
+        String PW = "marrakec";
+        ResultSet rs = null;
+
+        String qry = "SELECT CONCAT(ClubID, ', ', CName) "
+                + "as 'Club' FROM Club";
+
+        try {
+            Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
+            //System.out.println("connxion dazet");
+
+            Statement stmt = (Statement) conn.createStatement();
+
+            // Result Set get the result of the SQL query
+            rs = stmt.executeQuery(qry);
+
+            while (rs.next()) {
+                String Club = rs.getString("Club");
+                Club_jComboBox.addItem(Club);
+            }
+            //return rs;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
+        }
+    }
+    
     private ResultSet theQuery(String qry) {
         String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
         String Uid = "root";
@@ -224,10 +287,13 @@ public class NewEvent extends javax.swing.JFrame {
         EvtName_jTextField.setText("");
         EvtDesc_jTextField2.setText("");
         EvtBudget_jTextField3.setText("");
-        EvtLocation_jTextField5.setText("");
+        
+        Loc_jComboBox.setSelectedIndex(0);
+        
         EvtStart_jTextField6.setText("");
         EvtEnd_jTextField7.setText("");
-        ClubID_jTextField4.setText("");
+        
+        Club_jComboBox.setSelectedIndex(0);
     }
 
     private void Create_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Create_jButtonActionPerformed
@@ -237,10 +303,33 @@ public class NewEvent extends javax.swing.JFrame {
         String EvtName = EvtName_jTextField.getText();
         String EvtDesc = EvtDesc_jTextField2.getText();
         String EvtBudget = EvtBudget_jTextField3.getText();
-        String EvtLoc = EvtLocation_jTextField5.getText();
+        
+        
+        
         String EvtStart = EvtStart_jTextField6.getText();
         String EvtEnd = EvtEnd_jTextField7.getText();
-        String ClubID = ClubID_jTextField4.getText();
+        
+        String Loc_ID = Loc_jComboBox.getSelectedItem().toString();
+        String EvtLoc = "";
+        for (int i = 0; i < Loc_ID.length(); ++i) {
+            if (Loc_ID.charAt(i) != ',') {
+                EvtLoc += Loc_ID.charAt(i);
+            } else {
+                break;
+            }
+        }
+        System.out.println(EvtLoc);
+
+        String Club_ID_s = Club_jComboBox.getSelectedItem().toString();
+        String ClubID = "";
+        for (int i = 0; i < Club_ID_s.length(); ++i) {
+            if (Club_ID_s.charAt(i) != ',') {
+                ClubID += Club_ID_s.charAt(i);
+            } else {
+                break;
+            }
+        }
+        System.out.println(ClubID);
 
         int AdvApd = 0;
         if (AdvAPD_jCheckBox.isSelected()) {
@@ -316,16 +405,16 @@ public class NewEvent extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox AdvAPD_jCheckBox;
-    private javax.swing.JTextField ClubID_jTextField4;
+    private javax.swing.JComboBox<String> Club_jComboBox;
     private javax.swing.JButton Create_jButton;
     private javax.swing.JTextField EventID_jTextField;
     private javax.swing.JTextField EvtBudget_jTextField3;
     private javax.swing.JTextField EvtDesc_jTextField2;
     private javax.swing.JTextField EvtEnd_jTextField7;
-    private javax.swing.JTextField EvtLocation_jTextField5;
     private javax.swing.JTextField EvtName_jTextField;
     private javax.swing.JTextField EvtStart_jTextField6;
     private javax.swing.JButton Home_jButton;
+    private javax.swing.JComboBox<String> Loc_jComboBox;
     private javax.swing.JCheckBox SAOAPD_jCheckBox;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

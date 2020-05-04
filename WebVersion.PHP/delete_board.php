@@ -104,10 +104,10 @@
 <?php include_once 'includes/get_board_to_delete.inc.php';?>
 
   <!-- Delete product form to be output if the POST variables are not
-  set or if the deletion script caused an error. -->
+  set or if the deletion script caused an error.            <?php echo $_SERVER['PHP_SELF'];?>  -->
   <h2>Enter the board member to delete</h2>
   <?php echo $error_msg;?>
-  <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" name="Delete_board_form">
+  <form action="includes/get_board_to_delete.inc.php" method="post" name="Delete_board_form">
     Club ID: <input type="text" name="clubid" value="" />
     Student ID: <input type="text" name="studid" value="" />
     <input type="submit" value="Submit" onclick="return checkform2(this.form, this.form.clubid, this.form.studid);" />

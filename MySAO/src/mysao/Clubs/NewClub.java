@@ -245,14 +245,22 @@ public class NewClub extends javax.swing.JFrame {
         String CPass = CPass_jPasswordField.getText();
 
         String Adv_ID = Adv_jComboBox.getSelectedItem().toString();
-        char Adv = Adv_ID.charAt(0);
+        String Adv_s = "";
+        for (int i = 0; i < Adv_ID.length(); ++i) {
+            if (Adv_ID.charAt(i) != ',') {
+                Adv_s += Adv_ID.charAt(i);
+            } else {
+                break;
+            }
+        }
 
-        System.out.println("advisor: " + Adv);
+        System.out.println("advisor id: " + Adv_s);
+        int Adv = Integer.parseInt(Adv_s);
 
         String qry = "INSERT INTO Club VALUES "
                 + "("
                 + ClubID + ", '" + CName + "', '" + CDesc + "', "
-                + "'" + Cdate + "', " + Adv + ", 4000.0, "
+                + "'" + Cdate + "', " + Adv+ ", 4000.0, "
                 + "'" + CPass + "')";
 
         // Result Set get the result of the SQL query
