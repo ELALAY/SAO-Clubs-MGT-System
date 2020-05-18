@@ -30,13 +30,12 @@ public class Event {
 	); 
     */
     
-    private int EvtID, ClubID;
-    private String EvtName, EvtDescript, EvtLocation;
-    private double EvtBudget;
-    private Date EvtStart, EvtEnd;
-    private boolean AdvApproval, SAOApproval;
+    private String EvtID, ClubID, EvtName, EvtDescript, EvtLocation;
+    private String EvtBudget, Date, EvtStart, EvtEnd, AdvApproval, SAOApproval;
 
-    public Event(int EvtID, int ClubID, String EvtName, String EvtDescript, String EvtLocation, double EvtBudget, Date EvtStart, Date EvtEnd, boolean AdvApproval, boolean SAOApproval) {
+    public Event(String EvtID, String EvtName, String EvtDescript, String EvtBudget,
+            String EvtLocation,  String EvtStart, String EvtEnd, String ClubID,
+            String AdvApproval, String SAOApproval) {
         this.EvtID = EvtID;
         this.ClubID = ClubID;
         this.EvtName = EvtName;
@@ -49,19 +48,19 @@ public class Event {
         this.SAOApproval = SAOApproval;
     }
 
-    public int getEvtID() {
+    public String getEvtID() {
         return EvtID;
     }
 
-    public void setEvtID(int EvtID) {
+    public void setEvtID(String EvtID) {
         this.EvtID = EvtID;
     }
 
-    public int getClubID() {
+    public String getClubID() {
         return ClubID;
     }
 
-    public void setClubID(int ClubID) {
+    public void setClubID(String ClubID) {
         this.ClubID = ClubID;
     }
 
@@ -89,47 +88,52 @@ public class Event {
         this.EvtLocation = EvtLocation;
     }
 
-    public double getEvtBudget() {
+    public String getEvtBudget() {
         return EvtBudget;
     }
 
-    public void setEvtBudget(double EvtBudget) {
+    public void setEvtBudget(String EvtBudget) {
         this.EvtBudget = EvtBudget;
     }
 
-    public Date getEvtStart() {
+    public String getDate() {
+        return Date;
+    }
+
+    public void setDate(String Date) {
+        this.Date = Date;
+    }
+
+    public String getEvtStart() {
         return EvtStart;
     }
 
-    public void setEvtStart(Date EvtStart) {
+    public void setEvtStart(String EvtStart) {
         this.EvtStart = EvtStart;
     }
 
-    public Date getEvtEnd() {
+    public String getEvtEnd() {
         return EvtEnd;
     }
 
-    public void setEvtEnd(Date EvtEnd) {
+    public void setEvtEnd(String EvtEnd) {
         this.EvtEnd = EvtEnd;
     }
 
-    public boolean isAdvApproval() {
+    public String getAdvApproval() {
         return AdvApproval;
     }
 
-    public void setAdvApproval(boolean AdvApproval) {
+    public void setAdvApproval(String AdvApproval) {
         this.AdvApproval = AdvApproval;
     }
 
-    public boolean isSAOApproval() {
+    public String getSAOApproval() {
         return SAOApproval;
     }
 
-    public void setSAOApproval(boolean SAOApproval) {
+    public void setSAOApproval(String SAOApproval) {
         this.SAOApproval = SAOApproval;
     }
-    
-    public boolean equals(int EvtID){
-        return (this.EvtID == EvtID);
-    }
+
 }

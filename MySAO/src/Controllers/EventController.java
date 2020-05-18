@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 /**
  *
  * @author hp
+ * 
+ *  
  */
 public class EventController {
     Event event;
@@ -33,6 +35,24 @@ public class EventController {
         
         return mydb.SearchQueryExecution(qry);
         
+    }
+    
+    public void CreateEvent(Event evt){
+        
+        String qry = "INSERT INTO Event VALUES "
+                + "("
+                + evt.getEvtID()            + ", '" 
+                + evt.getEvtName()          + "', '" 
+                + evt.getEvtDescript()      + "', "
+                + evt.getEvtBudget()        + ", '" 
+                + evt.getEvtLocation()      + "', '" 
+                + evt.getEvtStart()         + "', '" 
+                + evt.getEvtEnd()           + "', "
+                + evt.getClubID()           + ", " 
+                + evt.getAdvApproval()      + ", " 
+                + evt.getSAOApproval()
+                + ")";
+        mydb.UpdateQueryExecution(qry);
     }
     
 }

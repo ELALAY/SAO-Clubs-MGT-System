@@ -6,6 +6,7 @@
 package View.Events;
 
 import Controllers.EventController;
+import Entities.Event;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import mysao.Home;
@@ -237,30 +238,6 @@ public class NewEvent extends javax.swing.JFrame {
         }
     }
 
-    private ResultSet theQuery(String qry) {
-        String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
-        String Uid = "root";
-        String PW = "marrakec";
-
-        try {
-            Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
-            //System.out.println("connxion dazet");
-
-            Statement stmt = (Statement) conn.createStatement();
-
-            // Result Set get the result of the SQL query
-            stmt.executeUpdate(qry);
-
-            JOptionPane.showMessageDialog(this, " Added successfully!");
-            //Clear_Fields();
-
-            //return rs;
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
-        }
-        return null;
-    }
-
     public void Clear_Fields() {
         EventID_jTextField.setText("");
         EvtName_jTextField.setText("");
@@ -308,30 +285,20 @@ public class NewEvent extends javax.swing.JFrame {
         }
         System.out.println(ClubID);
 
-        int AdvApd = 0;
+        String AdvApd = "0";
         if (AdvAPD_jCheckBox.isSelected()) {
-            AdvApd = 1;
+            AdvApd = "1";
         }
 
-        int SaoApd = 0;
+        String SaoApd = "0";
         if (SAOAPD_jCheckBox.isSelected()) {
-            SaoApd = 1;
+            SaoApd = "1";
         }
 
-        String qry = "INSERT INTO Event VALUES "
-                + "("
-                + EvtID + ", "
-                + " '" + EvtName + "', "
-                + " '" + EvtDesc + "', "
-                + EvtBudget + ", "
-                + " '" + EvtLoc + "', "
-                + " '" + EvtStart + "', "
-                + " '" + EvtEnd + "', "
-                + ClubID + ", " + AdvApd + ", " + SaoApd
-                + ")";
+        
 
         // Result Set get the result of the SQL query
-        ResultSet rs = theQuery(qry);
+        eventcont.CreateEvent(new Event(EvtID, EvtName, EvtDesc, EvtBudget, EvtLoc, EvtStart, EvtEnd, ClubID, AdvApd, SaoApd) );
     }//GEN-LAST:event_Create_jButtonActionPerformed
 
     private void Home_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Home_jButtonActionPerformed
