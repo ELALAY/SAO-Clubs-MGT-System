@@ -5,6 +5,7 @@
  */
 package View.Events;
 
+import Controllers.EventController;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import mysao.Home;
@@ -15,12 +16,15 @@ import mysao.Home;
  */
 public class NewEvent extends javax.swing.JFrame {
 
+    EventController eventcont;
+
     /**
      * Creates new form NewEvent
      */
     public NewEvent() {
         initComponents();
-        
+        this.eventcont = new EventController();
+
         FillClubIDCombo();
         FillLocationCombo();
     }
@@ -203,22 +207,9 @@ public class NewEvent extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void FillLocationCombo() {
-        String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
-        String Uid = "root";
-        String PW = "marrakec";
-        ResultSet rs = null;
-
-        String qry = "SELECT CONCAT(LocID,', ', LocBldg, ' ', LocRoom) "
-                + "as 'Location' FROM Location";
 
         try {
-            Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
-            //System.out.println("connxion dazet");
-
-            Statement stmt = (Statement) conn.createStatement();
-
-            // Result Set get the result of the SQL query
-            rs = stmt.executeQuery(qry);
+            ResultSet rs = eventcont.getAllLocations();
 
             while (rs.next()) {
                 String loc = rs.getString("Location");
@@ -231,22 +222,10 @@ public class NewEvent extends javax.swing.JFrame {
     }
 
     private void FillClubIDCombo() {
-        String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
-        String Uid = "root";
-        String PW = "marrakec";
-        ResultSet rs = null;
-
-        String qry = "SELECT CONCAT(ClubID, ', ', CName) "
-                + "as 'Club' FROM Club";
 
         try {
-            Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
-            //System.out.println("connxion dazet");
 
-            Statement stmt = (Statement) conn.createStatement();
-
-            // Result Set get the result of the SQL query
-            rs = stmt.executeQuery(qry);
+            ResultSet rs = eventcont.getAllClubs();
 
             while (rs.next()) {
                 String Club = rs.getString("Club");
@@ -257,7 +236,7 @@ public class NewEvent extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
         }
     }
-    
+
     private ResultSet theQuery(String qry) {
         String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
         String Uid = "root";
@@ -287,12 +266,12 @@ public class NewEvent extends javax.swing.JFrame {
         EvtName_jTextField.setText("");
         EvtDesc_jTextField2.setText("");
         EvtBudget_jTextField3.setText("");
-        
+
         Loc_jComboBox.setSelectedIndex(0);
-        
+
         EvtStart_jTextField6.setText("");
         EvtEnd_jTextField7.setText("");
-        
+
         Club_jComboBox.setSelectedIndex(0);
     }
 
@@ -303,12 +282,10 @@ public class NewEvent extends javax.swing.JFrame {
         String EvtName = EvtName_jTextField.getText();
         String EvtDesc = EvtDesc_jTextField2.getText();
         String EvtBudget = EvtBudget_jTextField3.getText();
-        
-        
-        
+
         String EvtStart = EvtStart_jTextField6.getText();
         String EvtEnd = EvtEnd_jTextField7.getText();
-        
+
         String Loc_ID = Loc_jComboBox.getSelectedItem().toString();
         String EvtLoc = "";
         for (int i = 0; i < Loc_ID.length(); ++i) {
@@ -343,14 +320,14 @@ public class NewEvent extends javax.swing.JFrame {
 
         String qry = "INSERT INTO Event VALUES "
                 + "("
-                + EvtID +           ", "
-                + " '" + EvtName +   "', "
-                + " '" + EvtDesc +   "', "
-                + EvtBudget +       ", "
-                + " '" + EvtLoc +    "', "
-                + " '" + EvtStart +  "', "
+                + EvtID + ", "
+                + " '" + EvtName + "', "
+                + " '" + EvtDesc + "', "
+                + EvtBudget + ", "
+                + " '" + EvtLoc + "', "
+                + " '" + EvtStart + "', "
                 + " '" + EvtEnd + "', "
-                + ClubID + ", " + AdvApd + ", "+ SaoApd
+                + ClubID + ", " + AdvApd + ", " + SaoApd
                 + ")";
 
         // Result Set get the result of the SQL query

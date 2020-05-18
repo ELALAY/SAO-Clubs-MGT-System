@@ -74,4 +74,8 @@ public class ClubControleler {
         String qry = "DELETE FROM Club WHERE ClubID = " + ClubID;
         
     }
+    
+    
+    
+    
 }
