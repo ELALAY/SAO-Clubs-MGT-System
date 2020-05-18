@@ -75,7 +75,13 @@ public class ClubControleler {
         
     }
     
-    
+    public ResultSet getAllAdvisors(){
+        
+        String qry = "SELECT CONCAT(AdvID, ', ', AdvFname, ' ', AdvLname) "
+                + "as 'Advisor' FROM Advisor";
+        
+        return mydb.SearchQueryExecution(qry);
+    }
     
     
 }

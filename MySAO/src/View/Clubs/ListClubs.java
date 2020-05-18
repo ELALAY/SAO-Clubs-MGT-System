@@ -321,23 +321,11 @@ public class ListClubs extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void FillAdvCombo() {
-        String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
-        String Uid = "root";
-        String PW = "marrakec";
-        ResultSet rs = null;
-
-        String qry = "SELECT CONCAT(AdvID, ', ', AdvFname, ' ', AdvLname) "
-                + "as 'Advisor' FROM Advisor";
 
         try {
-            Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
-            //System.out.println("connxion dazet");
-
-            Statement stmt = (Statement) conn.createStatement();
-
+           
             // Result Set get the result of the SQL query
-            rs = stmt.executeQuery(qry);
-
+            ResultSet rs = clubCont.getAllAdvisors();
             while (rs.next()) {
                 String Adv = rs.getString("Advisor");
                 Adv_jComboBox.addItem(Adv);

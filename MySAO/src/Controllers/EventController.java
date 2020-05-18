@@ -20,18 +20,14 @@ public class EventController {
         mydb = new DB_Connect();
     }
     
-    public ResultSet getAllLocations(){
-        ResultSet rs = null;
-        
+    public ResultSet getAllLocations(){        
         String qry = "SELECT CONCAT(LocID,', ', LocBldg, ' ', LocRoom) "
                 + "as 'Location' FROM Location";
         
         return mydb.SearchQueryExecution(qry);
     }
     
-    public ResultSet getAllClubs(){
-        ResultSet rs = null;
-        
+    public ResultSet getAllClubs(){        
         String qry = "SELECT CONCAT(ClubID, ', ', CName) "
                 + "as 'Club' FROM Club";
         
