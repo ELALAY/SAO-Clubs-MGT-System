@@ -390,21 +390,12 @@ public class ListClubs extends javax.swing.JFrame {
         String ClubID = ClubCode_TextField.getText();
 
         try {
-            /*
-            // qry = "SELECT ClubID, CName, CDescript, Balance FROM Club";
-            String qry = "SELECT * FROM Club";
-
             
-            //if (!VendCode.equals("_all")) {
-            if (!ClubID.equals("")) {
-                qry += " WHERE ClubID = " + ClubID;
-            }
-            //}s
-            // Result Set get the result of the SQL query
-            ResultSet rs = theQuery(qry);
-             */
-            ResultSet rs = clubCont.SearchClub_ByClubID(ClubID);
-
+             ResultSet rs;
+            if (ClubID.equals("")) {
+                 rs = clubCont.GetAllClubs();
+            } else rs = clubCont.SearchClub_ByClubID(ClubID);
+            
             ResultSetMetaData rsmd = rs.getMetaData();
             int c = rsmd.getColumnCount();
 

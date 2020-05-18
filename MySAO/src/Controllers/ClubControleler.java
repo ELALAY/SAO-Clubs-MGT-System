@@ -7,7 +7,6 @@ package Controllers;
 
 import Entities.Club;
 import java.sql.*;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,14 +30,14 @@ public class ClubControleler {
 
         return rs;
     }
-    
-    public ResultSet GetAllClubs(){
+
+    public ResultSet GetAllClubs() {
         ResultSet rs;
-        
+
         String qry = "SELECT * FROM Club";
-        
+
         rs = mydb.SearchQueryExecution(qry);
-        
+
         return rs;
     }
 
