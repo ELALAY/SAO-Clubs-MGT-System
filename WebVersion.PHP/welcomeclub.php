@@ -1,4 +1,4 @@
-<html>
+  <html>
     <head>
 
 
@@ -57,8 +57,8 @@
 
 
 $servername = "localhost";
-$username = "aouridy";
-$password = "parisberlinY7";
+$username = "root";
+$password = "marrakec";
 $dbname = "saodb";
 
 // Create connection

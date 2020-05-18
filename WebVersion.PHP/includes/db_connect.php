@@ -1,6 +1,6 @@
 <?php
   $host = "localhost";
-  $user = "un";
-  $password = "pw";
-  $dbname = "dbname";
+  $user = "root";
+  $password = "marrakec";
+  $dbname = "saodb";
   $dbh = new PDO("mysql:host=$host;dbname=$dbname", $user, $password);

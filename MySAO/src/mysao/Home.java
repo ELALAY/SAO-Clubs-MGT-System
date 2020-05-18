@@ -5,12 +5,12 @@
  */
 package mysao;
 
-import mysao.Clubs.NewClub;
-import mysao.Clubs.ListClubs;
-import mysao.Clubs.Search_A_Club;
-import mysao.Events.ListEvents;
-import mysao.Events.NewEvent;
-import mysao.Students.ListClubMembers;
+import View.Clubs.NewClub;
+import View.Clubs.ListClubs;
+import View.Clubs.Search_A_Club;
+import View.Events.ListEvents;
+import View.Events.NewEvent;
+import View.Students.ListClubMembers;
 
 /**
  *
