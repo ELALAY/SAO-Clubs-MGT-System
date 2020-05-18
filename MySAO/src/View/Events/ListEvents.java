@@ -211,6 +211,11 @@ public class ListEvents extends javax.swing.JFrame {
         Loc_jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
         ClubID_jComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        ClubID_jComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClubID_jComboBoxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -871,6 +876,10 @@ public class ListEvents extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
         }
     }//GEN-LAST:event_Delete_jButtonActionPerformed
+
+    private void ClubID_jComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClubID_jComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ClubID_jComboBoxActionPerformed
 
     /**
      * @param args the command line arguments

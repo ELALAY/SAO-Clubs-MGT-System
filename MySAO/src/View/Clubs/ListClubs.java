@@ -6,6 +6,7 @@
 package View.Clubs;
 
 import Controllers.ClubControleler;
+import Entities.Club;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,6 +34,7 @@ public class ListClubs extends javax.swing.JFrame {
         //Initialize the JTable data model
         ((DefaultTableModel) (jTable1.getModel())).setRowCount(0);
         ((DefaultTableModel) (jTable1.getModel())).setColumnCount(0);
+        ClubID_jTextField.setEnabled(false);
     }
 
     public ListClubs(String ClubID_Searched) {
@@ -45,6 +47,7 @@ public class ListClubs extends javax.swing.JFrame {
         //Initialize the JTable data model
         ((DefaultTableModel) (jTable1.getModel())).setRowCount(0);
         ((DefaultTableModel) (jTable1.getModel())).setColumnCount(0);
+        ClubID_jTextField.setEnabled(false);
     }
 
     /**
@@ -390,12 +393,14 @@ public class ListClubs extends javax.swing.JFrame {
         String ClubID = ClubCode_TextField.getText();
 
         try {
-            
-             ResultSet rs;
+
+            ResultSet rs;
             if (ClubID.equals("")) {
-                 rs = clubCont.GetAllClubs();
-            } else rs = clubCont.SearchClub_ByClubID(ClubID);
-            
+                rs = clubCont.GetAllClubs();
+            } else {
+                rs = clubCont.SearchClub_ByClubID(ClubID);
+            }
+
             ResultSetMetaData rsmd = rs.getMetaData();
             int c = rsmd.getColumnCount();
 
@@ -468,48 +473,23 @@ public class ListClubs extends javax.swing.JFrame {
         String ClubID = ClubID_jTextField.getText();
         String CDesc = CDescript_jTextField.getText();
         String CName = CName_jTextField.getText();
-        String Cdate = CDate_jTextField.getText();
+        String CDate = CDate_jTextField.getText();
         //String Adv = Advisor_jTextField.getText();
         String Balance = Balance_jTextField.getText();
         String CPass = CPass_jTextField.getText();
-
+        
         String Adv_ID = Adv_jComboBox.getSelectedItem().toString();
-        char Adv = Adv_ID.charAt(0);
-
-        String qry = "UPDATE Club "
-                + "SET "
-                + "ClubID =          " + ClubID + ", "
-                + "CName =          '" + CName + "', "
-                + " CDescript =     '" + CDesc + "', "
-                + "CcreationDate =  '" + Cdate + "', "
-                + "AdvID =           " + Adv + ", "
-                + "Balance =         " + Balance + ", "
-                + "CPass =          '" + CPass + "' "
-                + "WHERE ClubID =    " + ClubID;
-
-        String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
-        String Uid = "root";
-        String PW = "marrakec";
-        ResultSet rs = null;
-
-        try {
-            Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
-            //System.out.println("connxion dazet");
-
-            Statement stmt = (Statement) conn.createStatement();
-
-            // Result Set get the result of the SQL query
-            stmt.executeUpdate(qry);
-
-            JOptionPane.showMessageDialog(this, CName + " Added successfully!");
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ListClubs.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
+        String AdvID = "";
+        for (int i = 0; i < Adv_ID.length(); ++i) {
+            if (Adv_ID.charAt(i) != ',') {
+                AdvID += Adv_ID.charAt(i);
+            } else {
+                break;
+            }
         }
-
-        // Result Set get the result of the SQL query
-        //ResultSet rs = theQuery(qry);
+        System.out.println(AdvID);
+        
+        clubCont.UpdateClub_ByID(new Club(ClubID, CName, CDesc, CDate, AdvID, Balance, CPass));
 
     }//GEN-LAST:event_Update_jButtonActionPerformed
 
@@ -518,27 +498,7 @@ public class ListClubs extends javax.swing.JFrame {
         String ClubID = ClubID_jTextField.getText();
         String CName = CName_jTextField.getText();
 
-        String qry = "DELETE FROM Club WHERE ClubID = " + ClubID;
-
-        String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
-        String Uid = "root";
-        String PW = "marrakec";
-
-        try {
-            Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
-            //System.out.println("connxion dazet");
-
-            Statement stmt = (Statement) conn.createStatement();
-
-            // Result Set get the result of the SQL query
-            stmt.executeUpdate(qry);
-
-            JOptionPane.showMessageDialog(this, "The Club " + CName + " Deleted successfully!");
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ListClubs.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
-        }
+        clubCont.DeleteClub_ByID(ClubID);
 
     }//GEN-LAST:event_Delete_jButtonActionPerformed
 

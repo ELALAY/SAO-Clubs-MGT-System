@@ -26,60 +26,57 @@ public class Club {
 	CONSTRAINT manages FOREIGN KEY(AdvID) REFERENCES Advisor(AdvID) ON UPDATE CASCADE ON DELETE SET NULL
 	); 
      */
+    private String ClubID, AdvID, Balance, CName, CDescc, CPass, CCreationDate;
 
-    private int ClubID, AdvID;
-    private double Balance;
-    private String CNAme, Cdescript, CPass;
-    private Date CCreationDate;
-
-    public Club(int ClubID, int AdvID, double Balance, String CNAme, String Cdescript, String CPass, Date CCreationDate) {
+    public Club(String ClubID, String CName, String CDescc, String CCreationDate,
+            String AdvID, String Balance, String CPass){
         this.ClubID = ClubID;
         this.AdvID = AdvID;
         this.Balance = Balance;
-        this.CNAme = CNAme;
-        this.Cdescript = Cdescript;
+        this.CName = CName;
+        this.CDescc = CDescc;
         this.CPass = CPass;
         this.CCreationDate = CCreationDate;
     }
 
-    public int getClubID() {
+    public String getClubID() {
         return ClubID;
     }
 
-    public void setClubID(int ClubID) {
+    public void setClubID(String ClubID) {
         this.ClubID = ClubID;
     }
 
-    public int getAdvID() {
+    public String getAdvID() {
         return AdvID;
     }
 
-    public void setAdvID(int AdvID) {
+    public void setAdvID(String AdvID) {
         this.AdvID = AdvID;
     }
 
-    public double getBalance() {
+    public String getBalance() {
         return Balance;
     }
 
-    public void setBalance(double Balance) {
+    public void setBalance(String Balance) {
         this.Balance = Balance;
     }
 
-    public String getCNAme() {
-        return CNAme;
+    public String getCName() {
+        return CName;
     }
 
-    public void setCNAme(String CNAme) {
-        this.CNAme = CNAme;
+    public void setCName(String CName) {
+        this.CName = CName;
     }
 
     public String getCdescript() {
-        return Cdescript;
+        return CDescc;
     }
 
     public void setCdescript(String Cdescript) {
-        this.Cdescript = Cdescript;
+        this.CDescc = Cdescript;
     }
 
     public String getCPass() {
@@ -90,15 +87,14 @@ public class Club {
         this.CPass = CPass;
     }
 
-    public Date getCCreationDate() {
+    public String getCCreationDate() {
         return CCreationDate;
     }
 
-    public void setCCreationDate(Date CCreationDate) {
+    public void setCCreationDate(String CCreationDate) {
         this.CCreationDate = CCreationDate;
     }
+
     
-    public boolean equals(int ClubID){
-        return (this.ClubID == ClubID);
-    }
+    
 }

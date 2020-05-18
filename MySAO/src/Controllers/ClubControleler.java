@@ -11,6 +11,14 @@ import java.sql.*;
 /**
  *
  * @author hp
+ * 
+ * public Club(int ClubID, 
+ * int AdvID, 
+ * double Balance, 
+ * String CNAme, 
+ * String Cdescript, 
+ * String CPass, 
+ * Date CCreationDate)
  */
 public class ClubControleler {
 
@@ -41,4 +49,29 @@ public class ClubControleler {
         return rs;
     }
 
+    public void UpdateClub_ByID(Club club){
+        
+        String qry = "UPDATE Club "
+                + "SET "
+                + "ClubID =          " + club.getClubID() + ", "
+                + "CName =          '" + club.getCName() + "', "
+                + " CDescript =     '" + club.getCdescript() + "', "
+                + "CcreationDate =  '" + club.getCCreationDate() + "', "
+                + "AdvID =           " + club.getAdvID() + ", "
+                + "Balance =         " + club.getBalance() + ", "
+                + "CPass =          '" + club.getCPass() + "' "
+                + "WHERE ClubID =    " + club.getClubID();
+        
+        mydb.UpdateQueryExecution(qry);
+    }
+    
+    public void CreateClub(Club club){
+        
+    }
+    
+    public void DeleteClub_ByID(String ClubID){
+        
+        String qry = "DELETE FROM Club WHERE ClubID = " + ClubID;
+        
+    }
 }
