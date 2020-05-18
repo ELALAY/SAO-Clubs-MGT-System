@@ -5,6 +5,8 @@
  */
 package View.Clubs;
 
+import Controllers.ClubControleler;
+import Entities.Club;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import mysao.Home;
@@ -15,11 +17,15 @@ import mysao.Home;
  */
 public class NewClub extends javax.swing.JFrame {
 
+    ClubControleler clubCont;
+
     /**
      * Creates new form CreateNewClub
      */
     public NewClub() {
         initComponents();
+        clubCont = new ClubControleler();
+
         FillAdvCombo();
 
     }
@@ -186,24 +192,14 @@ public class NewClub extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private void FillAdvCombo() {
-        String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
-        String Uid = "root";
-        String PW = "marrakec";
-        ResultSet rs = null;
 
-        String qry = "SELECT CONCAT(AdvID, ', ', AdvFname, ' ', AdvLname) "
-                + "as 'Advisor' FROM Advisor";
+    private void FillAdvCombo() {
 
         try {
-            Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
-            //System.out.println("connxion dazet");
-
-            Statement stmt = (Statement) conn.createStatement();
-
+           
             // Result Set get the result of the SQL query
-            rs = stmt.executeQuery(qry);
-
+            ResultSet rs = clubCont.getAllAdvisors();
+            
             while (rs.next()) {
                 String Adv = rs.getString("Advisor");
                 Adv_jComboBox.addItem(Adv);
@@ -212,27 +208,6 @@ public class NewClub extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
         }
-    }
-
-    private ResultSet theQuery(String qry) {
-        String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
-        String Uid = "root";
-        String PW = "marrakec";
-
-        try {
-            Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
-            //System.out.println("connxion dazet");
-
-            Statement stmt = (Statement) conn.createStatement();
-
-            // Result Set get the result of the SQL query
-            stmt.executeUpdate(qry);
-            JOptionPane.showMessageDialog(this, " Added successfully!");
-            //return rs;
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
-        }
-        return null;
     }
 
     private void Save_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Save_jButtonActionPerformed
@@ -245,26 +220,17 @@ public class NewClub extends javax.swing.JFrame {
         String CPass = CPass_jPasswordField.getText();
 
         String Adv_ID = Adv_jComboBox.getSelectedItem().toString();
-        String Adv_s = "";
+        String Adv = "";
         for (int i = 0; i < Adv_ID.length(); ++i) {
             if (Adv_ID.charAt(i) != ',') {
-                Adv_s += Adv_ID.charAt(i);
+                Adv += Adv_ID.charAt(i);
             } else {
                 break;
             }
         }
+        System.out.println("advisor id: " + Adv);
 
-        System.out.println("advisor id: " + Adv_s);
-        int Adv = Integer.parseInt(Adv_s);
-
-        String qry = "INSERT INTO Club VALUES "
-                + "("
-                + ClubID + ", '" + CName + "', '" + CDesc + "', "
-                + "'" + Cdate + "', " + Adv+ ", 4000.0, "
-                + "'" + CPass + "')";
-
-        // Result Set get the result of the SQL query
-        ResultSet rs = theQuery(qry);
+        clubCont.CreateClub(new Club(ClubID, CName, CDesc, Cdate, Adv, "4000", CPass));
 
         Clear_Fields();
 

@@ -28,8 +28,8 @@ public class ListClubs extends javax.swing.JFrame {
      */
     public ListClubs() {
         initComponents();
-        FillAdvCombo();
         clubCont = new ClubControleler();
+        FillAdvCombo();
 
         //Initialize the JTable data model
         ((DefaultTableModel) (jTable1.getModel())).setRowCount(0);
@@ -39,6 +39,7 @@ public class ListClubs extends javax.swing.JFrame {
 
     public ListClubs(String ClubID_Searched) {
         initComponents();
+        clubCont = new ClubControleler();
         FillAdvCombo();
         this.ClubID_Searched = ClubID_Searched;
 
@@ -323,9 +324,10 @@ public class ListClubs extends javax.swing.JFrame {
     private void FillAdvCombo() {
 
         try {
-           
+
             // Result Set get the result of the SQL query
             ResultSet rs = clubCont.getAllAdvisors();
+
             while (rs.next()) {
                 String Adv = rs.getString("Advisor");
                 Adv_jComboBox.addItem(Adv);
@@ -340,26 +342,6 @@ public class ListClubs extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_Exit_btnActionPerformed
-
-    private ResultSet theQuery(String qry) {
-        String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
-        String Uid = "root";
-        String PW = "marrakec";
-        ResultSet rs = null;
-        try {
-            Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
-            //System.out.println("connxion dazet");
-
-            Statement stmt = (Statement) conn.createStatement();
-
-            // Result Set get the result of the SQL query
-            rs = stmt.executeQuery(qry);
-            return rs;
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
-        }
-        return rs;
-    }
 
     private void MainMenu_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainMenu_btnActionPerformed
         // TODO add your handling code here:
@@ -379,12 +361,14 @@ public class ListClubs extends javax.swing.JFrame {
     private void Search_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search_btnActionPerformed
         // TODO add your handling code here:
         String ClubID = ClubCode_TextField.getText();
-
+        boolean SearchAll = false;
+        
         try {
 
             ResultSet rs;
             if (ClubID.equals("")) {
                 rs = clubCont.GetAllClubs();
+                SearchAll = true;
             } else {
                 rs = clubCont.SearchClub_ByClubID(ClubID);
             }
@@ -407,6 +391,8 @@ public class ListClubs extends javax.swing.JFrame {
             }
             jTable1.setModel(dtm);
             Dialog_jLabel.setText("Resulting Rows: " + jTable1.getRowCount());
+            
+            if(SearchAll) Clear_Fields();
 
             //}
         } catch (SQLException ex) {
@@ -465,7 +451,7 @@ public class ListClubs extends javax.swing.JFrame {
         //String Adv = Advisor_jTextField.getText();
         String Balance = Balance_jTextField.getText();
         String CPass = CPass_jTextField.getText();
-        
+
         String Adv_ID = Adv_jComboBox.getSelectedItem().toString();
         String AdvID = "";
         for (int i = 0; i < Adv_ID.length(); ++i) {
@@ -476,9 +462,9 @@ public class ListClubs extends javax.swing.JFrame {
             }
         }
         System.out.println(AdvID);
-        
-        clubCont.UpdateClub_ByID(new Club(ClubID, CName, CDesc, CDate, AdvID, Balance, CPass));
 
+        clubCont.UpdateClub_ByID(new Club(ClubID, CName, CDesc, CDate, AdvID, Balance, CPass));
+        Clear_Fields();
     }//GEN-LAST:event_Update_jButtonActionPerformed
 
     private void Delete_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Delete_jButtonActionPerformed
@@ -487,6 +473,7 @@ public class ListClubs extends javax.swing.JFrame {
         String CName = CName_jTextField.getText();
 
         clubCont.DeleteClub_ByID(ClubID);
+        Clear_Fields();
 
     }//GEN-LAST:event_Delete_jButtonActionPerformed
 

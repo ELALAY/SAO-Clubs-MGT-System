@@ -66,12 +66,23 @@ public class ClubControleler {
     }
     
     public void CreateClub(Club club){
+        String qry = "INSERT INTO Club VALUES "
+                + "("
+                + club.getClubID()          + ", '" 
+                + club.getCName()           + "', '" 
+                + club.getCdescript()       + "', '" 
+                + club.getCCreationDate()   + "', " 
+                + club.getAdvID()           + ", "
+                + "4000.0, '" 
+                + club.getCPass()           + "')";
         
+        mydb.UpdateQueryExecution(qry);
     }
     
     public void DeleteClub_ByID(String ClubID){
         
         String qry = "DELETE FROM Club WHERE ClubID = " + ClubID;
+        mydb.UpdateQueryExecution(qry);
         
     }
     
