@@ -5,6 +5,8 @@
  */
 package View.Events;
 
+import Controllers.EventController;
+import Entities.Event;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,17 +20,22 @@ import mysao.Home;
  */
 public class ListEvents extends javax.swing.JFrame {
 
+    EventController eventCont;
+
     /**
      * Creates new form SearchProducts
      */
     public ListEvents() {
         initComponents();
+        eventCont = new EventController();
+
         FillLocationCombo();
         FillClubIDCombo();
 
         //Initialize the JTable data model
         ((DefaultTableModel) (jTable1.getModel())).setRowCount(0);
         ((DefaultTableModel) (jTable1.getModel())).setColumnCount(0);
+        EventID_jTextField.setEnabled(false);
     }
 
     /**
@@ -387,22 +394,11 @@ public class ListEvents extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void FillLocationCombo() {
-        String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
-        String Uid = "root";
-        String PW = "marrakec";
-        ResultSet rs = null;
-
-        String qry = "SELECT CONCAT(LocID,', ', LocBldg, ' ', LocRoom) "
-                + "as 'Location' FROM Location";
 
         try {
-            Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
-            //System.out.println("connxion dazet");
-
-            Statement stmt = (Statement) conn.createStatement();
 
             // Result Set get the result of the SQL query
-            rs = stmt.executeQuery(qry);
+            ResultSet rs = eventCont.getAllLocations();
 
             while (rs.next()) {
                 String loc = rs.getString("Location");
@@ -415,22 +411,11 @@ public class ListEvents extends javax.swing.JFrame {
     }
 
     private void FillClubIDCombo() {
-        String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
-        String Uid = "root";
-        String PW = "marrakec";
-        ResultSet rs = null;
-
-        String qry = "SELECT CONCAT(ClubID, ', ', CName) "
-                + "as 'Club' FROM Club";
 
         try {
-            Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
-            //System.out.println("connxion dazet");
-
-            Statement stmt = (Statement) conn.createStatement();
 
             // Result Set get the result of the SQL query
-            rs = stmt.executeQuery(qry);
+            ResultSet rs = eventCont.getAllClubs();
 
             while (rs.next()) {
                 String Club = rs.getString("Club");
@@ -446,26 +431,6 @@ public class ListEvents extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_Exit_btnActionPerformed
-
-    private ResultSet theQuery(String qry) {
-        String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
-        String Uid = "root";
-        String PW = "marrakec";
-
-        try {
-            Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
-            //System.out.println("connxion dazet");
-
-            Statement stmt = (Statement) conn.createStatement();
-
-            // Result Set get the result of the SQL query
-            ResultSet rs = stmt.executeQuery(qry);
-            return rs;
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
-        }
-        return null;
-    }
 
     private void MainMenu_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainMenu_btnActionPerformed
         // TODO add your handling code here:
@@ -486,23 +451,18 @@ public class ListEvents extends javax.swing.JFrame {
 
     private void Search_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search_btnActionPerformed
         // TODO add your handling code here:
+        String EvtCode = EvtCode_TextField.getText();
 
+        boolean searchAll = false;
         try {
 
-            String qry = "SELECT * FROM Event";
-            /*String qry = "SELECT e.EvtID, e.EvtName, e.EvtDescript, CONCAT(l.LocBldg, ' ', l.LocRoom) as 'Location', e.EvtStart, e.EvtEnd, c.CName, e.AdvApproval, e.SAOApproval "
-                    + "FROM Event as e JOIN Club as c ON e.ClubID = c.ClubID "
-                    + "JOIN Location as l ON l.LocID = e.EvtLocation "; */
-
-            String EvtCode = EvtCode_TextField.getText();
-
-            //if (!VendCode.equals("_all")) {
-            if (!EvtCode.equals("")) {
-                qry += " WHERE EvtID = " + EvtCode;
+            ResultSet rs = null;
+            if (EvtCode.equals("")) {
+                rs = eventCont.GetAllEvents();
+                searchAll = true;
+            } else {
+                rs = eventCont.SearchEvent_ByID(EvtCode);
             }
-            //}s
-            // Result Set get the result of the SQL query
-            ResultSet rs = theQuery(qry);
 
             ResultSetMetaData rsmd = rs.getMetaData();
             int c = rsmd.getColumnCount();
@@ -522,7 +482,10 @@ public class ListEvents extends javax.swing.JFrame {
             }
             jTable1.setModel(dtm);
             Dialog_jLabel.setText("Resulting Rows: " + jTable1.getRowCount());
-            //}
+
+            if (searchAll) {
+                Clear_Fields();
+            }
         } catch (SQLException ex) {
             Logger.getLogger(ListEvents.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -530,18 +493,10 @@ public class ListEvents extends javax.swing.JFrame {
 
     private void AllEvts_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AllEvts_jButtonActionPerformed
         // TODO add your handling code here:
-
+        String EvtCode = EvtCode_TextField.getText();
         try {
 
-            String qry = "SELECT * FROM Event";
-            /*String qry = "SELECT e.EvtID, e.EvtName, e.EvtDescript, CONCAT(l.LocBldg, ' ', l.LocRoom) as 'Location', e.EvtStart, e.EvtEnd, c.CName, e.AdvApproval, e.SAOApproval "
-                    + "FROM Event as e JOIN Club as c ON e.ClubID = c.ClubID "
-                    + "JOIN Location as l ON l.LocID = e.EvtLocation "; */
-
-            String EvtCode = EvtCode_TextField.getText();
-
-            // Result Set get the result of the SQL query
-            ResultSet rs = theQuery(qry);
+            ResultSet rs = eventCont.GetAllEvents();
 
             ResultSetMetaData rsmd = rs.getMetaData();
             int c = rsmd.getColumnCount();
@@ -561,7 +516,8 @@ public class ListEvents extends javax.swing.JFrame {
             }
             jTable1.setModel(dtm);
             Dialog_jLabel.setText("Resulting Rows: " + jTable1.getRowCount());
-            //}
+
+            Clear_Fields();
         } catch (SQLException ex) {
             Logger.getLogger(ListEvents.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -570,19 +526,10 @@ public class ListEvents extends javax.swing.JFrame {
 
     private void UnApprovedEvt_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UnApprovedEvt_jButtonActionPerformed
         // TODO add your handling code here:
+        String EvtCode = EvtCode_TextField.getText();
         try {
 
-            String qry = "SELECT * FROM Event "
-                    + "WHERE AdvApproval = 0 OR SAOApproval = 0";
-            /*String qry = "SELECT e.EvtID, e.EvtName, e.EvtDescript, CONCAT(l.LocBldg, ' ', l.LocRoom) as 'Location', e.EvtStart, e.EvtEnd, c.CName, e.AdvApproval, e.SAOApproval "
-                    + "FROM Event as e JOIN Club as c ON e.ClubID = c.ClubID "
-                    + "JOIN Location as l ON l.LocID = e.EvtLocation "
-                    + "WHERE AdvApproval = 0 OR SAOApproval = 0"; */
-
-            String EvtCode = EvtCode_TextField.getText();
-
-            // Result Set get the result of the SQL query
-            ResultSet rs = theQuery(qry);
+            ResultSet rs = eventCont.getUnapprovedEvents();
 
             ResultSetMetaData rsmd = rs.getMetaData();
             int c = rsmd.getColumnCount();
@@ -603,7 +550,7 @@ public class ListEvents extends javax.swing.JFrame {
             jTable1.setModel(dtm);
             Dialog_jLabel.setText("Resulting Rows: " + jTable1.getRowCount());
 
-            //}
+            Clear_Fields();
         } catch (SQLException ex) {
             Logger.getLogger(ListEvents.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -611,29 +558,12 @@ public class ListEvents extends javax.swing.JFrame {
 
     private void SearchDate_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchDate_jButtonActionPerformed
         // TODO add your handling code here:
+        String startDate = StartDate_jTextField.getText();
+        String endDate = EndDate_jTextField1.getText();
 
         try {
-            String startDate = StartDate_jTextField.getText();
-            String endDate = EndDate_jTextField1.getText();
 
-            String qry = "SELECT * FROM Event ";
-
-            if (!startDate.isEmpty() && endDate.isEmpty()) {
-                qry += "WHERE EvtStart > '" + startDate + "'";
-            } else if (!startDate.isEmpty() && !endDate.isEmpty()) {
-                qry += "WHERE EvtStart BETWEEN '" + startDate + "' AND '" + endDate + "'";
-            } else if (startDate.isEmpty() && endDate.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Empty Date Fields!");
-            }
-//                    + "WHERE EvtStart BETWEEN '" + startDate + "' AND '" + endDate + "'";
-
-            /*tring qry = "SELECT e.EvtID, e.EvtName, e.EvtDescript, CONCAT(l.LocBldg, ' ', l.LocRoom) as 'Location', e.EvtStart, e.EvtEnd, c.CName, e.AdvApproval, e.SAOApproval "
-                    + "FROM Event as e JOIN Club as c ON e.ClubID = c.ClubID "
-                    + "JOIN Location as l ON l.LocID = e.EvtLocation "
-                    + "WHERE EvtStart BETWEEN '" + startDate + "' AND '" + endDate + "'";
-             */
-            // Result Set get the result of the SQL query
-            ResultSet rs = theQuery(qry);
+            ResultSet rs = eventCont.SearchEventsInDateRange(startDate, endDate);
 
             if (rs != null) {
                 ResultSetMetaData rsmd = rs.getMetaData();
@@ -654,11 +584,12 @@ public class ListEvents extends javax.swing.JFrame {
                 }
                 jTable1.setModel(dtm);
                 Dialog_jLabel.setText("Resulting Rows: " + jTable1.getRowCount());
+
             } else {
                 JOptionPane.showMessageDialog(this, "No Results found!");
             }
 
-            //}
+            Clear_Fields();
         } catch (SQLException ex) {
             Logger.getLogger(ListEvents.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -800,81 +731,30 @@ public class ListEvents extends javax.swing.JFrame {
         }
         System.out.println(ClubID);
 
-        int AdvApd = 0;
+        String AdvApd = "0";
         if (AdvAPD_jCheckBox.isSelected()) {
-            AdvApd = 1;
+            AdvApd = "1";
         }
         System.out.println("AdvApd = " + AdvApd);
 
-        int SaoApd = 0;
+        String SaoApd = "0";
         if (SAOAPD_jCheckBox.isSelected()) {
-            SaoApd = 1;
+            SaoApd = "1";
         }
         System.out.println("AdvApd = " + SaoApd);
 
-        String qry = "UPDATE Event "
-                + "SET "
-                + "EvtID        = " + EvtID + ", "
-                + "EvtName      = '" + EvtName + "', "
-                + "EvtDescript  = '" + EvtDesc + "', "
-                + "EvtBudget    = " + EvtBudget + ", "
-                + "EvtLocation  = '" + EvtLoc + "', "
-                + "EvtStart     = '" + EvtStart + "', "
-                + "EvtEnd       = '" + EvtEnd + "', "
-                + "ClubID       = " + ClubID + ", "
-                + "AdvApproval  = " + AdvApd + ", "
-                + "SAOApproval  = " + SaoApd
-                + " WHERE EvtID = " + EvtID;
-
-        String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
-        String Uid = "root";
-        String PW = "marrakec";
-        //ResultSet rs = null;
-
-        try {
-            Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
-            //System.out.println("connxion dazet");
-
-            Statement stmt = (Statement) conn.createStatement();
-
-            // Result Set get the result of the SQL query
-            stmt.executeUpdate(qry);
-
-            JOptionPane.showMessageDialog(this, "Updated successfully!");
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ListEvents.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
-        }
-
+        eventCont.UpdateEvent(new Event(EvtID, EvtName, EvtDesc, EvtBudget, EvtLoc, EvtStart, EvtEnd, ClubID, AdvApd, SaoApd));
+        Clear_Fields();
     }//GEN-LAST:event_Update_jButtonActionPerformed
 
     private void Delete_jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Delete_jButtonActionPerformed
         // TODO add your handling code here:
         String EvtID = EventID_jTextField.getText();
 
-        String qry = "DELETE FROM Event WHERE EvtID = " + EvtID;
+        // Result Set get the result of the SQL query
+        eventCont.DeleteEvent(EvtID);
+        Clear_Fields();
 
-        String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
-        String Uid = "root";
-        String PW = "marrakec";
-        //ResultSet rs = null;
-
-        try {
-            Connection conn = DriverManager.getConnection(Conn_url, Uid, PW);
-            //System.out.println("connxion dazet");
-
-            Statement stmt = (Statement) conn.createStatement();
-
-            // Result Set get the result of the SQL query
-            stmt.executeUpdate(qry);
-
-            JOptionPane.showMessageDialog(this, "Deleted successfully!");
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ListEvents.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
-        }
     }//GEN-LAST:event_Delete_jButtonActionPerformed
 
     private void ClubID_jComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClubID_jComboBoxActionPerformed

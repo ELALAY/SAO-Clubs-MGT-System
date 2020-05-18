@@ -463,7 +463,7 @@ public class ListClubs extends javax.swing.JFrame {
         }
         System.out.println(AdvID);
 
-        clubCont.UpdateClub_ByID(new Club(ClubID, CName, CDesc, CDate, AdvID, Balance, CPass));
+        clubCont.UpdateClub(new Club(ClubID, CName, CDesc, CDate, AdvID, Balance, CPass));
         Clear_Fields();
     }//GEN-LAST:event_Update_jButtonActionPerformed
 

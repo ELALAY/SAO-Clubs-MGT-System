@@ -49,7 +49,7 @@ public class ClubControleler {
         return rs;
     }
 
-    public void UpdateClub_ByID(Club club){
+    public void UpdateClub(Club club){
         
         String qry = "UPDATE Club "
                 + "SET "
