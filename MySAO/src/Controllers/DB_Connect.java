@@ -32,8 +32,6 @@ public class DB_Connect {
 
             // Result Set get the result of the SQL query
             stmt.executeUpdate(qry);
-
-            JOptionPane.showMessageDialog(null, " Executed successfully!");
             //return rs;
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "A problem has occured in connexion to the Database!");
@@ -52,8 +50,6 @@ public class DB_Connect {
 
             // Result Set get the result of the SQL query
             rs = stmt.executeQuery(qry);
-            
-            JOptionPane.showMessageDialog(null, " Executed successfully!");
             return rs;
 
         } catch (SQLException ex) {
