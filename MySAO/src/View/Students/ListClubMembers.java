@@ -5,9 +5,8 @@
  */
 package View.Students;
 
+import Controllers.StudentController;
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import mysao.Home;
@@ -18,11 +17,14 @@ import mysao.Home;
  */
 public class ListClubMembers extends javax.swing.JFrame {
 
+    StudentController studCont;
+
     /**
      * Creates new form ListClubMembers
      */
     public ListClubMembers() {
         initComponents();
+        studCont = new StudentController();
     }
 
     /**
@@ -175,11 +177,11 @@ public class ListClubMembers extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private ResultSet theQuery(String qry) {
-        
+
         String Conn_url = "jdbc:mysql://localhost/saodb?serverTimezone=UTC";
         String Uid = "root";
         String PW = "marrakec";
-        
+
         ResultSet rs = null;
 
         try {
@@ -199,22 +201,16 @@ public class ListClubMembers extends javax.swing.JFrame {
 
     private void Search_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Search_btnActionPerformed
         // TODO add your handling code here:
-
+        String ClubID = ClubCode_TextField.getText();
+        ResultSet rs;
+        
         try {
-
-            // qry = "SELECT * FROM Student";
-            String qry = "SELECT StudID, SFname, SLname, SPhone, Spass, CName, CDescript, Semester, Year "
-                    + "FROM Student NATURAL JOIN Member NATURAL JOIN Club";
-
-            String ClubID = ClubCode_TextField.getText();
-
-            //if (!VendCode.equals("_all")) {
+            
             if (!ClubID.equals("")) {
-                qry += " WHERE ClubID = " + ClubID;
+                rs = studCont.getMembersOfClub(ClubID);
+            } else {
+                rs = studCont.getAllMembersOfClubs();
             }
-            //}s
-            // Result Set get the result of the SQL query
-            ResultSet rs = theQuery(qry);
 
             ResultSetMetaData rsmd = rs.getMetaData();
             int c = rsmd.getColumnCount();
@@ -233,11 +229,10 @@ public class ListClubMembers extends javax.swing.JFrame {
                 dtm.addRow(row);
             }
             jTable1.setModel(dtm);
+
+            dialog_jLabel.setText("Resulting Rows: " + jTable1.getRowCount());
+
             
-            dialog_jLabel.setText("Resulting Rows: "+ jTable1.getRowCount());
-
-
-            //}
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "A problem has occured in connexion to the Database!");
         }
